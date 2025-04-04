@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package order.v1;
-option go_package = "github.com/netscrawler/Restaurant_is/gen/go/order/v1;orderv1";
+option go_package = "github.com/netscrawler/RispProtos/proto/gen/go/order/order.v1;orderv1";
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";

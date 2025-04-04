@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package payment.v1;
-option go_package = "github.com/netscrawler/Restaurant_is/gen/go/payment/v1;paymentv1";
+option go_package = "github.com/netscrawler/RispProtos/proto/gen/go/payment/payment.v1;paymentv1";
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";

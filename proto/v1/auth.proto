@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package auth.v1;
-option go_package = "netscrawler.auth.v1;authv1";
+option go_package = "github.com/netscrawler/RispProtos/proto/gen/go/auth/auth.v1;authv1";
 
 
 service AuthService {
