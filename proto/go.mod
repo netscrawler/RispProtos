@@ -1,4 +1,4 @@
-module proto
+module github.com/netscrawler/RispProtos/proto
 
 go 1.24.1
 
