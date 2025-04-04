@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.19.6
-// source: v1/user.proto
+// source: v1/user/user.proto
 
 package userv1
 
@@ -20,16 +20,16 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	UserService_CreateUser_FullMethodName  = "/user.v1.UserService/CreateUser"
-	UserService_GetUser_FullMethodName     = "/user.v1.UserService/GetUser"
-	UserService_UpdateUser_FullMethodName  = "/user.v1.UserService/UpdateUser"
-	UserService_DeleteUser_FullMethodName  = "/user.v1.UserService/DeleteUser"
-	UserService_ListUsers_FullMethodName   = "/user.v1.UserService/ListUsers"
-	UserService_CreateStaff_FullMethodName = "/user.v1.UserService/CreateStaff"
-	UserService_UpdateStaff_FullMethodName = "/user.v1.UserService/UpdateStaff"
-	UserService_ListStaff_FullMethodName   = "/user.v1.UserService/ListStaff"
-	UserService_AssignRole_FullMethodName  = "/user.v1.UserService/AssignRole"
-	UserService_RevokeRole_FullMethodName  = "/user.v1.UserService/RevokeRole"
+	UserService_CreateUser_FullMethodName  = "/user.UserService/CreateUser"
+	UserService_GetUser_FullMethodName     = "/user.UserService/GetUser"
+	UserService_UpdateUser_FullMethodName  = "/user.UserService/UpdateUser"
+	UserService_DeleteUser_FullMethodName  = "/user.UserService/DeleteUser"
+	UserService_ListUsers_FullMethodName   = "/user.UserService/ListUsers"
+	UserService_CreateStaff_FullMethodName = "/user.UserService/CreateStaff"
+	UserService_UpdateStaff_FullMethodName = "/user.UserService/UpdateStaff"
+	UserService_ListStaff_FullMethodName   = "/user.UserService/ListStaff"
+	UserService_AssignRole_FullMethodName  = "/user.UserService/AssignRole"
+	UserService_RevokeRole_FullMethodName  = "/user.UserService/RevokeRole"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -410,7 +410,7 @@ func _UserService_RevokeRole_Handler(srv interface{}, ctx context.Context, dec f
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var UserService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "user.v1.UserService",
+	ServiceName: "user.UserService",
 	HandlerType: (*UserServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -455,5 +455,5 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "v1/user.proto",
+	Metadata: "v1/user/user.proto",
 }

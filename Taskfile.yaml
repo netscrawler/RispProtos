@@ -1,0 +1,42 @@
+version: "3"
+
+tasks:
+  default:
+    desc: "Список доступных задач"
+    cmds:
+      - task --list
+
+  gen-all:
+    desc: "Геренация go кода для всех proto"
+    cmds:
+      - protoc -I proto proto/v1/*/*.proto --go_out=./proto/gen/go/ --go_opt=paths=source_relative --go-grpc_out=./proto/gen/go/ --go-grpc_opt=paths=source_relative
+
+  gen-auth:
+    desc: "Генерация go кода для auth"
+    cmds:
+      - protoc -I proto proto/v1/auth/*.proto --go_out=./proto/gen/go/ --go_opt=paths=source_relative --go-grpc_out=./proto/gen/go/ --go-grpc_opt=paths=source_relative
+
+  gen-notify:
+    desc: "Генерация go кода для notify"
+    cmds:
+      - protoc -I proto proto/v1/notify/*.proto --go_out=./proto/gen/go/ --go_opt=paths=source_relative --go-grpc_out=./proto/gen/go/ --go-grpc_opt=paths=source_relative
+
+  gen-menu:
+    desc: "Генерация go кода для menu"
+    cmds:
+      - protoc -I proto proto/v1/menu/*.proto --go_out=./proto/gen/go/ --go_opt=paths=source_relative --go-grpc_out=./proto/gen/go/ --go-grpc_opt=paths=source_relative
+
+  gen-order:
+    desc: "Генерация go кода для order"
+    cmds:
+      - protoc -I proto proto/v1/order/*.proto --go_out=./proto/gen/go/ --go_opt=paths=source_relative --go-grpc_out=./proto/gen/go/ --go-grpc_opt=paths=source_relative
+
+  gen-payment:
+    desc: "Генерация go кода для payment"
+    cmds:
+      - protoc -I proto proto/v1/payment/*.proto --go_out=./proto/gen/go/ --go_opt=paths=source_relative --go-grpc_out=./proto/gen/go/ --go-grpc_opt=paths=source_relative
+
+  gen-user:
+    desc: "Генерация go кода для user"
+    cmds:
+      - protoc -I proto proto/v1/auth/*.proto --go_out=./proto/gen/go/ --go_opt=paths=source_relative --go-grpc_out=./proto/gen/go/ --go-grpc_opt=paths=source_relative

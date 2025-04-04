@@ -1,0 +1,116 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "netscrawler.auth.v1;authv1";
+
+service Auth {
+  rpc LoginClientInit(LoginClientInitRequest) returns (LoginInitResponse);
+  rpc LoginClientConfirm(LoginClientConfirmRequest) returns (LoginResponse);
+  rpc RegisterStaff(RegisterStaffRequest) returns (RegisterStaffResponse);
+  rpc UpdateStaff(UpdateStaffRequest) returns (UpdateStaffResponse);
+  rpc LoginStaff(LoginStaffRequest) returns (LoginResponse);
+  rpc DeactivateStaff(DeactivateStaffRequest) returns (DeactivateStaffResponse);
+  rpc LoginYandex(OAuthYandexRequest) returns (LoginResponse);
+  rpc Validate(ValidateRequest) returns (ValidateResponse);
+  rpc Refresh(RefreshRequest) returns (LoginResponse);
+}
+
+enum Role {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_CLIENT = 1;
+  ROLE_ADMIN = 2;
+  ROLE_STAFF = 3;
+}
+
+message UpdateStaffRequest {
+  string current_email = 1;
+  optional string new_work_email = 2;
+  optional string new_position = 3;
+  optional string new_password = 4;
+}
+
+message UpdateStaffResponse {
+  Staff staff = 1;
+}
+
+message RegisterStaffRequest {
+  Staff staff = 1;
+}
+
+message RegisterStaffResponse {
+  Staff staff = 1;
+}
+
+message DeactivateStaffRequest {
+  string work_email = 1;
+}
+
+message DeactivateStaffResponse {
+  string work_email = 1;
+  string position = 2;
+  string status = 3;
+}
+
+message LoginClientInitRequest {
+  string phone = 1;
+}
+message LoginClientConfirmRequest {
+  string phone = 1;
+  string code = 2;
+}
+
+message LoginStaffRequest {
+  Staff staff = 1;
+  string password = 2;
+}
+
+message OAuthYandexRequest {
+  string code = 1;
+  string redirect_uri = 2;
+}
+
+message LoginInitResponse {
+  string status = 1;
+  string error = 3;
+}
+
+message LoginResponse {
+  string access_token = 1;
+  int64 expires_in = 2;
+  string refresh_token = 3;
+  int64 refresh_token_expires_in = 4;
+  User user = 5;
+}
+
+message ValidateRequest {
+  string token = 1;
+}
+
+message ValidateResponse {
+  bool valid = 1;
+  User user = 2;
+}
+
+message RefreshRequest {
+  string refresh_token = 1;
+}
+
+message User {
+  string id = 1;
+  oneof user_type {
+    Client client = 2;
+    Staff staff = 3;
+  }
+  repeated Role roles = 4;
+}
+
+message Client {
+  string email = 1;
+  string phone = 2;
+}
+
+message Staff {
+  string work_email = 1;
+  string position = 2;
+}

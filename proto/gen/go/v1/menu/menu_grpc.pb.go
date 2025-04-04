@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.19.6
-// source: v1/menu.proto
+// source: v1/menu/menu.proto
 
 package menuv1
 
@@ -20,21 +20,21 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	MenuService_CreateCategory_FullMethodName       = "/menu.v1.MenuService/CreateCategory"
-	MenuService_UpdateCategory_FullMethodName       = "/menu.v1.MenuService/UpdateCategory"
-	MenuService_ListCategories_FullMethodName       = "/menu.v1.MenuService/ListCategories"
-	MenuService_DeleteCategory_FullMethodName       = "/menu.v1.MenuService/DeleteCategory"
-	MenuService_CreateDish_FullMethodName           = "/menu.v1.MenuService/CreateDish"
-	MenuService_UpdateDish_FullMethodName           = "/menu.v1.MenuService/UpdateDish"
-	MenuService_GetDish_FullMethodName              = "/menu.v1.MenuService/GetDish"
-	MenuService_ListDishes_FullMethodName           = "/menu.v1.MenuService/ListDishes"
-	MenuService_CreateMenu_FullMethodName           = "/menu.v1.MenuService/CreateMenu"
-	MenuService_GetActiveMenu_FullMethodName        = "/menu.v1.MenuService/GetActiveMenu"
-	MenuService_UpdateMenu_FullMethodName           = "/menu.v1.MenuService/UpdateMenu"
-	MenuService_CreatePromotion_FullMethodName      = "/menu.v1.MenuService/CreatePromotion"
-	MenuService_UpdatePromotion_FullMethodName      = "/menu.v1.MenuService/UpdatePromotion"
-	MenuService_ListActivePromotions_FullMethodName = "/menu.v1.MenuService/ListActivePromotions"
-	MenuService_GenerateUploadUrl_FullMethodName    = "/menu.v1.MenuService/GenerateUploadUrl"
+	MenuService_CreateCategory_FullMethodName       = "/menu.MenuService/CreateCategory"
+	MenuService_UpdateCategory_FullMethodName       = "/menu.MenuService/UpdateCategory"
+	MenuService_ListCategories_FullMethodName       = "/menu.MenuService/ListCategories"
+	MenuService_DeleteCategory_FullMethodName       = "/menu.MenuService/DeleteCategory"
+	MenuService_CreateDish_FullMethodName           = "/menu.MenuService/CreateDish"
+	MenuService_UpdateDish_FullMethodName           = "/menu.MenuService/UpdateDish"
+	MenuService_GetDish_FullMethodName              = "/menu.MenuService/GetDish"
+	MenuService_ListDishes_FullMethodName           = "/menu.MenuService/ListDishes"
+	MenuService_CreateMenu_FullMethodName           = "/menu.MenuService/CreateMenu"
+	MenuService_GetActiveMenu_FullMethodName        = "/menu.MenuService/GetActiveMenu"
+	MenuService_UpdateMenu_FullMethodName           = "/menu.MenuService/UpdateMenu"
+	MenuService_CreatePromotion_FullMethodName      = "/menu.MenuService/CreatePromotion"
+	MenuService_UpdatePromotion_FullMethodName      = "/menu.MenuService/UpdatePromotion"
+	MenuService_ListActivePromotions_FullMethodName = "/menu.MenuService/ListActivePromotions"
+	MenuService_GenerateUploadUrl_FullMethodName    = "/menu.MenuService/GenerateUploadUrl"
 )
 
 // MenuServiceClient is the client API for MenuService service.
@@ -584,7 +584,7 @@ func _MenuService_GenerateUploadUrl_Handler(srv interface{}, ctx context.Context
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MenuService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "menu.v1.MenuService",
+	ServiceName: "menu.MenuService",
 	HandlerType: (*MenuServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -649,5 +649,5 @@ var MenuService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "v1/menu.proto",
+	Metadata: "v1/menu/menu.proto",
 }
