@@ -30,15 +30,10 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AuthServiceClient interface {
-	// Аутентификация клиента (email/password)
 	LoginClient(ctx context.Context, in *LoginClientRequest, opts ...grpc.CallOption) (*LoginResponse, error)
-	// Аутентификация сотрудника (work email/password)
 	LoginStaff(ctx context.Context, in *LoginStaffRequest, opts ...grpc.CallOption) (*LoginResponse, error)
-	// OAuth2 через Yandex (для клиентов)
 	LoginYandex(ctx context.Context, in *OAuthYandexRequest, opts ...grpc.CallOption) (*LoginResponse, error)
-	// Валидация и декодирование JWT токена
 	Validate(ctx context.Context, in *ValidateRequest, opts ...grpc.CallOption) (*ValidateResponse, error)
-	// Обновление токена
 	Refresh(ctx context.Context, in *RefreshRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 }
 
@@ -104,15 +99,10 @@ func (c *authServiceClient) Refresh(ctx context.Context, in *RefreshRequest, opt
 // All implementations must embed UnimplementedAuthServiceServer
 // for forward compatibility
 type AuthServiceServer interface {
-	// Аутентификация клиента (email/password)
 	LoginClient(context.Context, *LoginClientRequest) (*LoginResponse, error)
-	// Аутентификация сотрудника (work email/password)
 	LoginStaff(context.Context, *LoginStaffRequest) (*LoginResponse, error)
-	// OAuth2 через Yandex (для клиентов)
 	LoginYandex(context.Context, *OAuthYandexRequest) (*LoginResponse, error)
-	// Валидация и декодирование JWT токена
 	Validate(context.Context, *ValidateRequest) (*ValidateResponse, error)
-	// Обновление токена
 	Refresh(context.Context, *RefreshRequest) (*LoginResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }

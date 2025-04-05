@@ -4,27 +4,17 @@ package auth.v1;
 option go_package = "github.com/netscrawler/RispProtos/proto/gen/go/auth/auth.v1;authv1";
 
 service AuthService {
-  // Аутентификация клиента (email/password)
   rpc LoginClient(LoginClientRequest) returns (LoginResponse);
-
-  // Аутентификация сотрудника (work email/password)
   rpc LoginStaff(LoginStaffRequest) returns (LoginResponse);
-
-  // OAuth2 через Yandex (для клиентов)
   rpc LoginYandex(OAuthYandexRequest) returns (LoginResponse);
-
-  // Валидация и декодирование JWT токена
   rpc Validate(ValidateRequest) returns (ValidateResponse);
-
-  // Обновление токена
   rpc Refresh(RefreshRequest) returns (LoginResponse);
 }
 
-// Роли пользователей
 enum Role {
   ROLE_UNSPECIFIED = 0;
-  ROLE_CLIENT = 1;    // Обычный клиент
-  ROLE_ADMIN = 2;     // Администратор
+  ROLE_CLIENT = 1;
+  ROLE_ADMIN = 2;
 }
 
 message LoginClientRequest {
@@ -38,19 +28,19 @@ message LoginStaffRequest {
 }
 
 message OAuthYandexRequest {
-  string code = 1;           // Код авторизации от Yandex OAuth
-  string redirect_uri = 2;   // URI перенаправления
+  string code = 1;
+  string redirect_uri = 2;
 }
 
 message LoginResponse {
-  string access_token = 1;   // JWT токен
-  int64 expires_in = 2;      // Время жизни токена в секундах
-  string refresh_token = 3;  // Refresh токен
+  string access_token = 1;
+  int64 expires_in = 2;
+  string refresh_token = 3;
   User user = 4;
 }
 
 message ValidateRequest {
-  string access_token = 1;
+  string token = 1;
 }
 
 message ValidateResponse {
@@ -63,7 +53,7 @@ message RefreshRequest {
 }
 
 message User {
-  string id = 1;             // UUID пользователя
+  string id = 1;
   oneof user_type {
     Client client = 2;
     Staff staff = 3;
