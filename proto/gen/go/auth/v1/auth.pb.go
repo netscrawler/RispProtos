@@ -7,10 +7,11 @@
 package authv1
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -774,21 +775,23 @@ func file_v1_auth_proto_rawDescGZIP() []byte {
 	return file_v1_auth_proto_rawDescData
 }
 
-var file_v1_auth_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
-var file_v1_auth_proto_goTypes = []interface{}{
-	(Role)(0),                  // 0: auth.v1.Role
-	(*LoginClientRequest)(nil), // 1: auth.v1.LoginClientRequest
-	(*LoginStaffRequest)(nil),  // 2: auth.v1.LoginStaffRequest
-	(*OAuthYandexRequest)(nil), // 3: auth.v1.OAuthYandexRequest
-	(*LoginResponse)(nil),      // 4: auth.v1.LoginResponse
-	(*ValidateRequest)(nil),    // 5: auth.v1.ValidateRequest
-	(*ValidateResponse)(nil),   // 6: auth.v1.ValidateResponse
-	(*RefreshRequest)(nil),     // 7: auth.v1.RefreshRequest
-	(*User)(nil),               // 8: auth.v1.User
-	(*Client)(nil),             // 9: auth.v1.Client
-	(*Staff)(nil),              // 10: auth.v1.Staff
-}
+var (
+	file_v1_auth_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+	file_v1_auth_proto_msgTypes  = make([]protoimpl.MessageInfo, 10)
+	file_v1_auth_proto_goTypes   = []interface{}{
+		(Role)(0),                  // 0: auth.v1.Role
+		(*LoginClientRequest)(nil), // 1: auth.v1.LoginClientRequest
+		(*LoginStaffRequest)(nil),  // 2: auth.v1.LoginStaffRequest
+		(*OAuthYandexRequest)(nil), // 3: auth.v1.OAuthYandexRequest
+		(*LoginResponse)(nil),      // 4: auth.v1.LoginResponse
+		(*ValidateRequest)(nil),    // 5: auth.v1.ValidateRequest
+		(*ValidateResponse)(nil),   // 6: auth.v1.ValidateResponse
+		(*RefreshRequest)(nil),     // 7: auth.v1.RefreshRequest
+		(*User)(nil),               // 8: auth.v1.User
+		(*Client)(nil),             // 9: auth.v1.Client
+		(*Staff)(nil),              // 10: auth.v1.Staff
+	}
+)
 var file_v1_auth_proto_depIdxs = []int32{
 	8,  // 0: auth.v1.LoginResponse.user:type_name -> auth.v1.User
 	8,  // 1: auth.v1.ValidateResponse.user:type_name -> auth.v1.User
