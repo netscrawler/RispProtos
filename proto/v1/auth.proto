@@ -3,43 +3,38 @@ syntax = "proto3";
 package auth.v1;
 option go_package = "github.com/netscrawler/RispProtos/proto/gen/go/auth/auth.v1;authv1";
 
-
 service AuthService {
-  // Базовая аутентификация (логин/пароль)
-  rpc Login(LoginRequest) returns (LoginResponse);
+  // Аутентификация клиента (email/password)
+  rpc LoginClient(LoginClientRequest) returns (LoginResponse);
 
-  // OAuth2 через Yandex
+  // Аутентификация сотрудника (work email/password)
+  rpc LoginStaff(LoginStaffRequest) returns (LoginResponse);
+
+  // OAuth2 через Yandex (для клиентов)
   rpc LoginYandex(OAuthYandexRequest) returns (LoginResponse);
 
   // Валидация и декодирование JWT токена
   rpc Validate(ValidateRequest) returns (ValidateResponse);
 
-  // Обновление токена (не реализовано в первой версии)
+  // Обновление токена
   rpc Refresh(RefreshRequest) returns (LoginResponse);
 }
 
 // Роли пользователей
 enum Role {
   ROLE_UNSPECIFIED = 0;
-  ROLE_CUSTOMER = 1;    // Обычный клиент
-  ROLE_WAITER = 2;      // Официант
-  ROLE_CHEF = 3;        // Повар
-  ROLE_ADMIN = 4;       // Администратор
+  ROLE_CLIENT = 1;    // Обычный клиент
+  ROLE_ADMIN = 2;     // Администратор
 }
 
-// Тип учетной записи
-enum AccountType {
-  ACCOUNT_TYPE_UNSPECIFIED = 0;
-  ACCOUNT_TYPE_USER = 1;     // Клиент
-  ACCOUNT_TYPE_STAFF = 2;    // Сотрудник
+message LoginClientRequest {
+  string email = 1;
+  string password = 2;
 }
 
-message LoginRequest {
-  oneof identifier {
-    string email = 1;        // Для пользователей
-    string work_email = 2;   // Для сотрудников
-  }
-  string password = 3;
+message LoginStaffRequest {
+  string work_email = 1;
+  string password = 2;
 }
 
 message OAuthYandexRequest {
@@ -50,7 +45,8 @@ message OAuthYandexRequest {
 message LoginResponse {
   string access_token = 1;   // JWT токен
   int64 expires_in = 2;      // Время жизни токена в секундах
-  User user = 3;
+  string refresh_token = 3;  // Refresh токен
+  User user = 4;
 }
 
 message ValidateRequest {
@@ -66,21 +62,22 @@ message RefreshRequest {
   string refresh_token = 1;
 }
 
-// Общая информация о пользователе
 message User {
-  int64 id = 1;
-  AccountType account_type = 2;
-  repeated Role roles = 3;
-  UserMetadata metadata = 4;
+  string id = 1;             // UUID пользователя
+  oneof user_type {
+    Client client = 2;
+    Staff staff = 3;
+  }
+  repeated Role roles = 4;
 }
 
-// Дополнительные метаданные пользователя
-message UserMetadata {
+message Client {
   string email = 1;
   string phone = 2;
   string full_name = 3;
+}
 
-  // Только для сотрудников
-  string position = 10;
-  string hire_date = 11;
+message Staff {
+  string work_email = 1;
+  string position = 2;
 }
