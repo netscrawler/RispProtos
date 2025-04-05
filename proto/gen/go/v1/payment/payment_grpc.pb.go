@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.19.6
-// source: v1/payment.proto
+// source: v1/payment/payment.proto
 
 package paymentv1
 
@@ -20,11 +20,11 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	PaymentService_CreatePayment_FullMethodName     = "/payment.v1.PaymentService/CreatePayment"
-	PaymentService_GetPaymentStatus_FullMethodName  = "/payment.v1.PaymentService/GetPaymentStatus"
-	PaymentService_ProcessRefund_FullMethodName     = "/payment.v1.PaymentService/ProcessRefund"
-	PaymentService_SetMockBehavior_FullMethodName   = "/payment.v1.PaymentService/SetMockBehavior"
-	PaymentService_ResetMockBehavior_FullMethodName = "/payment.v1.PaymentService/ResetMockBehavior"
+	PaymentService_CreatePayment_FullMethodName     = "/payment.PaymentService/CreatePayment"
+	PaymentService_GetPaymentStatus_FullMethodName  = "/payment.PaymentService/GetPaymentStatus"
+	PaymentService_ProcessRefund_FullMethodName     = "/payment.PaymentService/ProcessRefund"
+	PaymentService_SetMockBehavior_FullMethodName   = "/payment.PaymentService/SetMockBehavior"
+	PaymentService_ResetMockBehavior_FullMethodName = "/payment.PaymentService/ResetMockBehavior"
 )
 
 // PaymentServiceClient is the client API for PaymentService service.
@@ -238,7 +238,7 @@ func _PaymentService_ResetMockBehavior_Handler(srv interface{}, ctx context.Cont
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var PaymentService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "payment.v1.PaymentService",
+	ServiceName: "payment.PaymentService",
 	HandlerType: (*PaymentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -263,5 +263,5 @@ var PaymentService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "v1/payment.proto",
+	Metadata: "v1/payment/payment.proto",
 }
