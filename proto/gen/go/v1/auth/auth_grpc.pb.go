@@ -19,21 +19,21 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	AuthService_LoginClient_FullMethodName        = "/auth.AuthService/LoginClient"
-	AuthService_LoginClientConfirm_FullMethodName = "/auth.AuthService/LoginClientConfirm"
-	AuthService_RegisterStaff_FullMethodName      = "/auth.AuthService/RegisterStaff"
-	AuthService_LoginStaff_FullMethodName         = "/auth.AuthService/LoginStaff"
-	AuthService_DeactivateStaff_FullMethodName    = "/auth.AuthService/DeactivateStaff"
-	AuthService_LoginYandex_FullMethodName        = "/auth.AuthService/LoginYandex"
-	AuthService_Validate_FullMethodName           = "/auth.AuthService/Validate"
-	AuthService_Refresh_FullMethodName            = "/auth.AuthService/Refresh"
+	Auth_LoginClientInit_FullMethodName    = "/auth.Auth/LoginClientInit"
+	Auth_LoginClientConfirm_FullMethodName = "/auth.Auth/LoginClientConfirm"
+	Auth_RegisterStaff_FullMethodName      = "/auth.Auth/RegisterStaff"
+	Auth_LoginStaff_FullMethodName         = "/auth.Auth/LoginStaff"
+	Auth_DeactivateStaff_FullMethodName    = "/auth.Auth/DeactivateStaff"
+	Auth_LoginYandex_FullMethodName        = "/auth.Auth/LoginYandex"
+	Auth_Validate_FullMethodName           = "/auth.Auth/Validate"
+	Auth_Refresh_FullMethodName            = "/auth.Auth/Refresh"
 )
 
-// AuthServiceClient is the client API for AuthService service.
+// AuthClient is the client API for Auth service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type AuthServiceClient interface {
-	LoginClient(ctx context.Context, in *LoginClientInitRequest, opts ...grpc.CallOption) (*LoginInitResponse, error)
+type AuthClient interface {
+	LoginClientInit(ctx context.Context, in *LoginClientInitRequest, opts ...grpc.CallOption) (*LoginInitResponse, error)
 	LoginClientConfirm(ctx context.Context, in *LoginClientConfirmRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	RegisterStaff(ctx context.Context, in *RegisterStaffRequest, opts ...grpc.CallOption) (*RegisterStaffResponse, error)
 	LoginStaff(ctx context.Context, in *LoginStaffRequest, opts ...grpc.CallOption) (*LoginResponse, error)
@@ -43,99 +43,99 @@ type AuthServiceClient interface {
 	Refresh(ctx context.Context, in *RefreshRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 }
 
-type authServiceClient struct {
+type authClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewAuthServiceClient(cc grpc.ClientConnInterface) AuthServiceClient {
-	return &authServiceClient{cc}
+func NewAuthClient(cc grpc.ClientConnInterface) AuthClient {
+	return &authClient{cc}
 }
 
-func (c *authServiceClient) LoginClient(ctx context.Context, in *LoginClientInitRequest, opts ...grpc.CallOption) (*LoginInitResponse, error) {
+func (c *authClient) LoginClientInit(ctx context.Context, in *LoginClientInitRequest, opts ...grpc.CallOption) (*LoginInitResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LoginInitResponse)
-	err := c.cc.Invoke(ctx, AuthService_LoginClient_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Auth_LoginClientInit_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *authServiceClient) LoginClientConfirm(ctx context.Context, in *LoginClientConfirmRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
+func (c *authClient) LoginClientConfirm(ctx context.Context, in *LoginClientConfirmRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LoginResponse)
-	err := c.cc.Invoke(ctx, AuthService_LoginClientConfirm_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Auth_LoginClientConfirm_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *authServiceClient) RegisterStaff(ctx context.Context, in *RegisterStaffRequest, opts ...grpc.CallOption) (*RegisterStaffResponse, error) {
+func (c *authClient) RegisterStaff(ctx context.Context, in *RegisterStaffRequest, opts ...grpc.CallOption) (*RegisterStaffResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RegisterStaffResponse)
-	err := c.cc.Invoke(ctx, AuthService_RegisterStaff_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Auth_RegisterStaff_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *authServiceClient) LoginStaff(ctx context.Context, in *LoginStaffRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
+func (c *authClient) LoginStaff(ctx context.Context, in *LoginStaffRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LoginResponse)
-	err := c.cc.Invoke(ctx, AuthService_LoginStaff_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Auth_LoginStaff_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *authServiceClient) DeactivateStaff(ctx context.Context, in *DeactivateStaffRequest, opts ...grpc.CallOption) (*DeactivateStaffResponse, error) {
+func (c *authClient) DeactivateStaff(ctx context.Context, in *DeactivateStaffRequest, opts ...grpc.CallOption) (*DeactivateStaffResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeactivateStaffResponse)
-	err := c.cc.Invoke(ctx, AuthService_DeactivateStaff_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Auth_DeactivateStaff_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *authServiceClient) LoginYandex(ctx context.Context, in *OAuthYandexRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
+func (c *authClient) LoginYandex(ctx context.Context, in *OAuthYandexRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LoginResponse)
-	err := c.cc.Invoke(ctx, AuthService_LoginYandex_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Auth_LoginYandex_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *authServiceClient) Validate(ctx context.Context, in *ValidateRequest, opts ...grpc.CallOption) (*ValidateResponse, error) {
+func (c *authClient) Validate(ctx context.Context, in *ValidateRequest, opts ...grpc.CallOption) (*ValidateResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ValidateResponse)
-	err := c.cc.Invoke(ctx, AuthService_Validate_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Auth_Validate_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *authServiceClient) Refresh(ctx context.Context, in *RefreshRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
+func (c *authClient) Refresh(ctx context.Context, in *RefreshRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LoginResponse)
-	err := c.cc.Invoke(ctx, AuthService_Refresh_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Auth_Refresh_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// AuthServiceServer is the server API for AuthService service.
-// All implementations must embed UnimplementedAuthServiceServer
+// AuthServer is the server API for Auth service.
+// All implementations must embed UnimplementedAuthServer
 // for forward compatibility
-type AuthServiceServer interface {
-	LoginClient(context.Context, *LoginClientInitRequest) (*LoginInitResponse, error)
+type AuthServer interface {
+	LoginClientInit(context.Context, *LoginClientInitRequest) (*LoginInitResponse, error)
 	LoginClientConfirm(context.Context, *LoginClientConfirmRequest) (*LoginResponse, error)
 	RegisterStaff(context.Context, *RegisterStaffRequest) (*RegisterStaffResponse, error)
 	LoginStaff(context.Context, *LoginStaffRequest) (*LoginResponse, error)
@@ -143,232 +143,232 @@ type AuthServiceServer interface {
 	LoginYandex(context.Context, *OAuthYandexRequest) (*LoginResponse, error)
 	Validate(context.Context, *ValidateRequest) (*ValidateResponse, error)
 	Refresh(context.Context, *RefreshRequest) (*LoginResponse, error)
-	mustEmbedUnimplementedAuthServiceServer()
+	mustEmbedUnimplementedAuthServer()
 }
 
-// UnimplementedAuthServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedAuthServiceServer struct {
+// UnimplementedAuthServer must be embedded to have forward compatible implementations.
+type UnimplementedAuthServer struct {
 }
 
-func (UnimplementedAuthServiceServer) LoginClient(context.Context, *LoginClientInitRequest) (*LoginInitResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method LoginClient not implemented")
+func (UnimplementedAuthServer) LoginClientInit(context.Context, *LoginClientInitRequest) (*LoginInitResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LoginClientInit not implemented")
 }
-func (UnimplementedAuthServiceServer) LoginClientConfirm(context.Context, *LoginClientConfirmRequest) (*LoginResponse, error) {
+func (UnimplementedAuthServer) LoginClientConfirm(context.Context, *LoginClientConfirmRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginClientConfirm not implemented")
 }
-func (UnimplementedAuthServiceServer) RegisterStaff(context.Context, *RegisterStaffRequest) (*RegisterStaffResponse, error) {
+func (UnimplementedAuthServer) RegisterStaff(context.Context, *RegisterStaffRequest) (*RegisterStaffResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterStaff not implemented")
 }
-func (UnimplementedAuthServiceServer) LoginStaff(context.Context, *LoginStaffRequest) (*LoginResponse, error) {
+func (UnimplementedAuthServer) LoginStaff(context.Context, *LoginStaffRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginStaff not implemented")
 }
-func (UnimplementedAuthServiceServer) DeactivateStaff(context.Context, *DeactivateStaffRequest) (*DeactivateStaffResponse, error) {
+func (UnimplementedAuthServer) DeactivateStaff(context.Context, *DeactivateStaffRequest) (*DeactivateStaffResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeactivateStaff not implemented")
 }
-func (UnimplementedAuthServiceServer) LoginYandex(context.Context, *OAuthYandexRequest) (*LoginResponse, error) {
+func (UnimplementedAuthServer) LoginYandex(context.Context, *OAuthYandexRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginYandex not implemented")
 }
-func (UnimplementedAuthServiceServer) Validate(context.Context, *ValidateRequest) (*ValidateResponse, error) {
+func (UnimplementedAuthServer) Validate(context.Context, *ValidateRequest) (*ValidateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Validate not implemented")
 }
-func (UnimplementedAuthServiceServer) Refresh(context.Context, *RefreshRequest) (*LoginResponse, error) {
+func (UnimplementedAuthServer) Refresh(context.Context, *RefreshRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Refresh not implemented")
 }
-func (UnimplementedAuthServiceServer) mustEmbedUnimplementedAuthServiceServer() {}
+func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}
 
-// UnsafeAuthServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to AuthServiceServer will
+// UnsafeAuthServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AuthServer will
 // result in compilation errors.
-type UnsafeAuthServiceServer interface {
-	mustEmbedUnimplementedAuthServiceServer()
+type UnsafeAuthServer interface {
+	mustEmbedUnimplementedAuthServer()
 }
 
-func RegisterAuthServiceServer(s grpc.ServiceRegistrar, srv AuthServiceServer) {
-	s.RegisterService(&AuthService_ServiceDesc, srv)
+func RegisterAuthServer(s grpc.ServiceRegistrar, srv AuthServer) {
+	s.RegisterService(&Auth_ServiceDesc, srv)
 }
 
-func _AuthService_LoginClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Auth_LoginClientInit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LoginClientInitRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServiceServer).LoginClient(ctx, in)
+		return srv.(AuthServer).LoginClientInit(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AuthService_LoginClient_FullMethodName,
+		FullMethod: Auth_LoginClientInit_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).LoginClient(ctx, req.(*LoginClientInitRequest))
+		return srv.(AuthServer).LoginClientInit(ctx, req.(*LoginClientInitRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AuthService_LoginClientConfirm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Auth_LoginClientConfirm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LoginClientConfirmRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServiceServer).LoginClientConfirm(ctx, in)
+		return srv.(AuthServer).LoginClientConfirm(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AuthService_LoginClientConfirm_FullMethodName,
+		FullMethod: Auth_LoginClientConfirm_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).LoginClientConfirm(ctx, req.(*LoginClientConfirmRequest))
+		return srv.(AuthServer).LoginClientConfirm(ctx, req.(*LoginClientConfirmRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AuthService_RegisterStaff_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Auth_RegisterStaff_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RegisterStaffRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServiceServer).RegisterStaff(ctx, in)
+		return srv.(AuthServer).RegisterStaff(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AuthService_RegisterStaff_FullMethodName,
+		FullMethod: Auth_RegisterStaff_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).RegisterStaff(ctx, req.(*RegisterStaffRequest))
+		return srv.(AuthServer).RegisterStaff(ctx, req.(*RegisterStaffRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AuthService_LoginStaff_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Auth_LoginStaff_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LoginStaffRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServiceServer).LoginStaff(ctx, in)
+		return srv.(AuthServer).LoginStaff(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AuthService_LoginStaff_FullMethodName,
+		FullMethod: Auth_LoginStaff_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).LoginStaff(ctx, req.(*LoginStaffRequest))
+		return srv.(AuthServer).LoginStaff(ctx, req.(*LoginStaffRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AuthService_DeactivateStaff_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Auth_DeactivateStaff_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeactivateStaffRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServiceServer).DeactivateStaff(ctx, in)
+		return srv.(AuthServer).DeactivateStaff(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AuthService_DeactivateStaff_FullMethodName,
+		FullMethod: Auth_DeactivateStaff_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).DeactivateStaff(ctx, req.(*DeactivateStaffRequest))
+		return srv.(AuthServer).DeactivateStaff(ctx, req.(*DeactivateStaffRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AuthService_LoginYandex_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Auth_LoginYandex_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OAuthYandexRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServiceServer).LoginYandex(ctx, in)
+		return srv.(AuthServer).LoginYandex(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AuthService_LoginYandex_FullMethodName,
+		FullMethod: Auth_LoginYandex_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).LoginYandex(ctx, req.(*OAuthYandexRequest))
+		return srv.(AuthServer).LoginYandex(ctx, req.(*OAuthYandexRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AuthService_Validate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Auth_Validate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ValidateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServiceServer).Validate(ctx, in)
+		return srv.(AuthServer).Validate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AuthService_Validate_FullMethodName,
+		FullMethod: Auth_Validate_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).Validate(ctx, req.(*ValidateRequest))
+		return srv.(AuthServer).Validate(ctx, req.(*ValidateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AuthService_Refresh_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Auth_Refresh_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RefreshRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServiceServer).Refresh(ctx, in)
+		return srv.(AuthServer).Refresh(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AuthService_Refresh_FullMethodName,
+		FullMethod: Auth_Refresh_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).Refresh(ctx, req.(*RefreshRequest))
+		return srv.(AuthServer).Refresh(ctx, req.(*RefreshRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// AuthService_ServiceDesc is the grpc.ServiceDesc for AuthService service.
+// Auth_ServiceDesc is the grpc.ServiceDesc for Auth service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var AuthService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "auth.AuthService",
-	HandlerType: (*AuthServiceServer)(nil),
+var Auth_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "auth.Auth",
+	HandlerType: (*AuthServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "LoginClient",
-			Handler:    _AuthService_LoginClient_Handler,
+			MethodName: "LoginClientInit",
+			Handler:    _Auth_LoginClientInit_Handler,
 		},
 		{
 			MethodName: "LoginClientConfirm",
-			Handler:    _AuthService_LoginClientConfirm_Handler,
+			Handler:    _Auth_LoginClientConfirm_Handler,
 		},
 		{
 			MethodName: "RegisterStaff",
-			Handler:    _AuthService_RegisterStaff_Handler,
+			Handler:    _Auth_RegisterStaff_Handler,
 		},
 		{
 			MethodName: "LoginStaff",
-			Handler:    _AuthService_LoginStaff_Handler,
+			Handler:    _Auth_LoginStaff_Handler,
 		},
 		{
 			MethodName: "DeactivateStaff",
-			Handler:    _AuthService_DeactivateStaff_Handler,
+			Handler:    _Auth_DeactivateStaff_Handler,
 		},
 		{
 			MethodName: "LoginYandex",
-			Handler:    _AuthService_LoginYandex_Handler,
+			Handler:    _Auth_LoginYandex_Handler,
 		},
 		{
 			MethodName: "Validate",
-			Handler:    _AuthService_Validate_Handler,
+			Handler:    _Auth_Validate_Handler,
 		},
 		{
 			MethodName: "Refresh",
-			Handler:    _AuthService_Refresh_Handler,
+			Handler:    _Auth_Refresh_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

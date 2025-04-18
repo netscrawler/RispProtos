@@ -4,8 +4,8 @@ package auth;
 
 option go_package = "netscrawler.auth.v1;authv1";
 
-service AuthService {
-  rpc LoginClient(LoginClientInitRequest) returns (LoginInitResponse);
+service Auth {
+  rpc LoginClientInit(LoginClientInitRequest) returns (LoginInitResponse);
   rpc LoginClientConfirm(LoginClientConfirmRequest) returns (LoginResponse);
   rpc RegisterStaff(RegisterStaffRequest) returns (RegisterStaffResponse);
   rpc LoginStaff(LoginStaffRequest) returns (LoginResponse);
