@@ -5,7 +5,7 @@ package auth;
 option go_package = "netscrawler.auth.v1;authv1";
 
 service AuthService {
-  rpc LoginClient(LoginClientRequest) returns (LoginInitResponse);
+  rpc LoginClient(LoginClientInitRequest) returns (LoginInitResponse);
   rpc LoginClientConfirm(LoginClientConfirmRequest) returns (LoginResponse);
   rpc RegisterStaff(RegisterStaffRequest) returns (RegisterStaffResponse);
   rpc LoginStaff(LoginStaffRequest) returns (LoginResponse);
@@ -37,7 +37,7 @@ message DeactivateStaffResponse {
   string Status = 3;
 }
 
-message LoginClientRequest {
+message LoginClientInitRequest {
   string phone = 1;
 }
 message LoginClientConfirmRequest {
@@ -65,9 +65,10 @@ message LoginResponse {
   string access_token = 1;
   int64 expires_in = 2;
   string refresh_token = 3;
-  User user = 4;
-  string status = 5;
-  string error = 6;
+  int64 refresh_token_expires_in = 4;
+  User user = 5;
+  string status = 6;
+  string error = 7;
 }
 
 message ValidateRequest {

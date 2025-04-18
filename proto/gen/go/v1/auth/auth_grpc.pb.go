@@ -33,7 +33,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AuthServiceClient interface {
-	LoginClient(ctx context.Context, in *LoginClientRequest, opts ...grpc.CallOption) (*LoginInitResponse, error)
+	LoginClient(ctx context.Context, in *LoginClientInitRequest, opts ...grpc.CallOption) (*LoginInitResponse, error)
 	LoginClientConfirm(ctx context.Context, in *LoginClientConfirmRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	RegisterStaff(ctx context.Context, in *RegisterStaffRequest, opts ...grpc.CallOption) (*RegisterStaffResponse, error)
 	LoginStaff(ctx context.Context, in *LoginStaffRequest, opts ...grpc.CallOption) (*LoginResponse, error)
@@ -51,7 +51,7 @@ func NewAuthServiceClient(cc grpc.ClientConnInterface) AuthServiceClient {
 	return &authServiceClient{cc}
 }
 
-func (c *authServiceClient) LoginClient(ctx context.Context, in *LoginClientRequest, opts ...grpc.CallOption) (*LoginInitResponse, error) {
+func (c *authServiceClient) LoginClient(ctx context.Context, in *LoginClientInitRequest, opts ...grpc.CallOption) (*LoginInitResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LoginInitResponse)
 	err := c.cc.Invoke(ctx, AuthService_LoginClient_FullMethodName, in, out, cOpts...)
@@ -135,7 +135,7 @@ func (c *authServiceClient) Refresh(ctx context.Context, in *RefreshRequest, opt
 // All implementations must embed UnimplementedAuthServiceServer
 // for forward compatibility
 type AuthServiceServer interface {
-	LoginClient(context.Context, *LoginClientRequest) (*LoginInitResponse, error)
+	LoginClient(context.Context, *LoginClientInitRequest) (*LoginInitResponse, error)
 	LoginClientConfirm(context.Context, *LoginClientConfirmRequest) (*LoginResponse, error)
 	RegisterStaff(context.Context, *RegisterStaffRequest) (*RegisterStaffResponse, error)
 	LoginStaff(context.Context, *LoginStaffRequest) (*LoginResponse, error)
@@ -150,7 +150,7 @@ type AuthServiceServer interface {
 type UnimplementedAuthServiceServer struct {
 }
 
-func (UnimplementedAuthServiceServer) LoginClient(context.Context, *LoginClientRequest) (*LoginInitResponse, error) {
+func (UnimplementedAuthServiceServer) LoginClient(context.Context, *LoginClientInitRequest) (*LoginInitResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginClient not implemented")
 }
 func (UnimplementedAuthServiceServer) LoginClientConfirm(context.Context, *LoginClientConfirmRequest) (*LoginResponse, error) {
@@ -188,7 +188,7 @@ func RegisterAuthServiceServer(s grpc.ServiceRegistrar, srv AuthServiceServer) {
 }
 
 func _AuthService_LoginClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginClientRequest)
+	in := new(LoginClientInitRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -200,7 +200,7 @@ func _AuthService_LoginClient_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: AuthService_LoginClient_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).LoginClient(ctx, req.(*LoginClientRequest))
+		return srv.(AuthServiceServer).LoginClient(ctx, req.(*LoginClientInitRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
