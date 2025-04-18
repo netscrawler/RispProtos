@@ -7,7 +7,9 @@ option go_package = "netscrawler.auth.v1;authv1";
 service AuthService {
   rpc LoginClient(LoginClientRequest) returns (LoginInitResponse);
   rpc LoginClientConfirm(LoginClientConfirmRequest) returns (LoginResponse);
+  rpc RegisterStaff(RegisterStaffRequest) returns (RegisterStaffResponse);
   rpc LoginStaff(LoginStaffRequest) returns (LoginResponse);
+  rpc DeactivateStaff(DeactivateStaffRequest) returns (DeactivateStaffResponse);
   rpc LoginYandex(OAuthYandexRequest) returns (LoginResponse);
   rpc Validate(ValidateRequest) returns (ValidateResponse);
   rpc Refresh(RefreshRequest) returns (LoginResponse);
@@ -17,6 +19,22 @@ enum Role {
   ROLE_UNSPECIFIED = 0;
   ROLE_CLIENT = 1;
   ROLE_ADMIN = 2;
+}
+
+message RegisterStaffRequest {
+  string work_email = 1;
+  string position = 2;
+}
+message RegisterStaffResponse {}
+
+message DeactivateStaffRequest {
+  string work_email = 1;
+}
+
+message DeactivateStaffResponse {
+  string work_email = 1;
+  string position = 2;
+  string Status = 3;
 }
 
 message LoginClientRequest {
