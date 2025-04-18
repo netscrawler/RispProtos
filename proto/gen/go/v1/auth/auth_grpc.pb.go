@@ -22,6 +22,7 @@ const (
 	Auth_LoginClientInit_FullMethodName    = "/auth.Auth/LoginClientInit"
 	Auth_LoginClientConfirm_FullMethodName = "/auth.Auth/LoginClientConfirm"
 	Auth_RegisterStaff_FullMethodName      = "/auth.Auth/RegisterStaff"
+	Auth_UpdateStaff_FullMethodName        = "/auth.Auth/UpdateStaff"
 	Auth_LoginStaff_FullMethodName         = "/auth.Auth/LoginStaff"
 	Auth_DeactivateStaff_FullMethodName    = "/auth.Auth/DeactivateStaff"
 	Auth_LoginYandex_FullMethodName        = "/auth.Auth/LoginYandex"
@@ -36,6 +37,7 @@ type AuthClient interface {
 	LoginClientInit(ctx context.Context, in *LoginClientInitRequest, opts ...grpc.CallOption) (*LoginInitResponse, error)
 	LoginClientConfirm(ctx context.Context, in *LoginClientConfirmRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	RegisterStaff(ctx context.Context, in *RegisterStaffRequest, opts ...grpc.CallOption) (*RegisterStaffResponse, error)
+	UpdateStaff(ctx context.Context, in *UpdateStaffRequest, opts ...grpc.CallOption) (*UpdateStaffResponse, error)
 	LoginStaff(ctx context.Context, in *LoginStaffRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	DeactivateStaff(ctx context.Context, in *DeactivateStaffRequest, opts ...grpc.CallOption) (*DeactivateStaffResponse, error)
 	LoginYandex(ctx context.Context, in *OAuthYandexRequest, opts ...grpc.CallOption) (*LoginResponse, error)
@@ -75,6 +77,16 @@ func (c *authClient) RegisterStaff(ctx context.Context, in *RegisterStaffRequest
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RegisterStaffResponse)
 	err := c.cc.Invoke(ctx, Auth_RegisterStaff_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authClient) UpdateStaff(ctx context.Context, in *UpdateStaffRequest, opts ...grpc.CallOption) (*UpdateStaffResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateStaffResponse)
+	err := c.cc.Invoke(ctx, Auth_UpdateStaff_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -138,6 +150,7 @@ type AuthServer interface {
 	LoginClientInit(context.Context, *LoginClientInitRequest) (*LoginInitResponse, error)
 	LoginClientConfirm(context.Context, *LoginClientConfirmRequest) (*LoginResponse, error)
 	RegisterStaff(context.Context, *RegisterStaffRequest) (*RegisterStaffResponse, error)
+	UpdateStaff(context.Context, *UpdateStaffRequest) (*UpdateStaffResponse, error)
 	LoginStaff(context.Context, *LoginStaffRequest) (*LoginResponse, error)
 	DeactivateStaff(context.Context, *DeactivateStaffRequest) (*DeactivateStaffResponse, error)
 	LoginYandex(context.Context, *OAuthYandexRequest) (*LoginResponse, error)
@@ -158,6 +171,9 @@ func (UnimplementedAuthServer) LoginClientConfirm(context.Context, *LoginClientC
 }
 func (UnimplementedAuthServer) RegisterStaff(context.Context, *RegisterStaffRequest) (*RegisterStaffResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterStaff not implemented")
+}
+func (UnimplementedAuthServer) UpdateStaff(context.Context, *UpdateStaffRequest) (*UpdateStaffResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateStaff not implemented")
 }
 func (UnimplementedAuthServer) LoginStaff(context.Context, *LoginStaffRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginStaff not implemented")
@@ -237,6 +253,24 @@ func _Auth_RegisterStaff_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServer).RegisterStaff(ctx, req.(*RegisterStaffRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Auth_UpdateStaff_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateStaffRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).UpdateStaff(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_UpdateStaff_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).UpdateStaff(ctx, req.(*UpdateStaffRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -349,6 +383,10 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RegisterStaff",
 			Handler:    _Auth_RegisterStaff_Handler,
+		},
+		{
+			MethodName: "UpdateStaff",
+			Handler:    _Auth_UpdateStaff_Handler,
 		},
 		{
 			MethodName: "LoginStaff",

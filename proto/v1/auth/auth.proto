@@ -8,6 +8,7 @@ service Auth {
   rpc LoginClientInit(LoginClientInitRequest) returns (LoginInitResponse);
   rpc LoginClientConfirm(LoginClientConfirmRequest) returns (LoginResponse);
   rpc RegisterStaff(RegisterStaffRequest) returns (RegisterStaffResponse);
+  rpc UpdateStaff(UpdateStaffRequest) returns (UpdateStaffResponse);
   rpc LoginStaff(LoginStaffRequest) returns (LoginResponse);
   rpc DeactivateStaff(DeactivateStaffRequest) returns (DeactivateStaffResponse);
   rpc LoginYandex(OAuthYandexRequest) returns (LoginResponse);
@@ -19,6 +20,17 @@ enum Role {
   ROLE_UNSPECIFIED = 0;
   ROLE_CLIENT = 1;
   ROLE_ADMIN = 2;
+}
+
+message UpdateStaffRequest {
+  string current_email = 1;
+  optional string new_work_email = 2;
+  optional string new_position = 3;
+  optional string new_password = 4;
+}
+
+message UpdateStaffResponse {
+  Staff staff = 1;
 }
 
 message RegisterStaffRequest {
