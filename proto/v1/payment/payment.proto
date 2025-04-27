@@ -1,10 +1,11 @@
 syntax = "proto3";
 
 package payment;
-option go_package = "netscrawler.payment.v1;paymentv1";
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
+
+option go_package = "netscrawler.payment.v1;paymentv1";
 
 service PaymentService {
   // Основные операции
@@ -20,32 +21,32 @@ service PaymentService {
 // Статусы платежа
 enum PaymentStatus {
   PAYMENT_STATUS_UNSPECIFIED = 0;
-  PAYMENT_STATUS_PENDING = 1;     // Ожидает обработки
-  PAYMENT_STATUS_SUCCEEDED = 2;   // Успешно завершен
-  PAYMENT_STATUS_FAILED = 3;      // Ошибка оплаты
-  PAYMENT_STATUS_REFUNDED = 4;    // Возврат средств
+  PAYMENT_STATUS_PENDING = 1; // Ожидает обработки
+  PAYMENT_STATUS_SUCCEEDED = 2; // Успешно завершен
+  PAYMENT_STATUS_FAILED = 3; // Ошибка оплаты
+  PAYMENT_STATUS_REFUNDED = 4; // Возврат средств
 }
 
 // Типы платежных методов
 enum PaymentMethodType {
   PAYMENT_METHOD_UNSPECIFIED = 0;
-  PAYMENT_METHOD_CARD = 1;        // Банковская карта
-  PAYMENT_METHOD_CASH = 2;        // Наличные
+  PAYMENT_METHOD_CARD = 1; // Банковская карта
+  PAYMENT_METHOD_CASH = 2; // Наличные
   PAYMENT_METHOD_APPLE_PAY = 3;
   PAYMENT_METHOD_GOOGLE_PAY = 4;
 }
 
 message PaymentRequest {
-  string order_id = 1;            // Идентификатор заказа
-  double amount = 2;              // Сумма платежа
-  PaymentMethodType method = 3;   // Способ оплаты
+  UUID order_id = 1; // Идентификатор заказа
+  double amount = 2; // Сумма платежа
+  PaymentMethodType method = 3; // Способ оплаты
   map<string, string> metadata = 4; // Дополнительные данные
 }
 
 message PaymentResponse {
-  string payment_id = 1;          // Уникальный идентификатор платежа
-  string status = 2;              // Текущий статус
-  string details = 3;             // Детализация (для ошибок)
+  string payment_id = 1; // Уникальный идентификатор платежа
+  string status = 2; // Текущий статус
+  string details = 3; // Детализация (для ошибок)
   google.protobuf.Timestamp created_at = 4;
 }
 
@@ -55,14 +56,14 @@ message PaymentStatusRequest {
 
 message PaymentStatusResponse {
   PaymentStatus status = 1;
-  string error_message = 2;       // Причина ошибки, если есть
+  string error_message = 2; // Причина ошибки, если есть
   google.protobuf.Timestamp updated_at = 3;
 }
 
 message RefundRequest {
   string payment_id = 1;
-  double amount = 2;              // Сумма для возврата
-  string reason = 3;              // Причина возврата
+  double amount = 2; // Сумма для возврата
+  string reason = 3; // Причина возврата
 }
 
 message RefundResponse {
@@ -83,9 +84,8 @@ message MockConfig {
   int32 response_delay_ms = 3;
 
   // Регулярное выражение для ошибок по метаданным
-  string error_pattern = 4;       // Пример: ".*TEST_FAIL.*"
+  string error_pattern = 4; // Пример: ".*TEST_FAIL.*"
 
   // Автоматическое время ответа
-  bool auto_approve_refunds = 5;  // Авто-подтверждение возвратов
+  bool auto_approve_refunds = 5; // Авто-подтверждение возвратов
 }
-
