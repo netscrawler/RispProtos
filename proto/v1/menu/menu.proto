@@ -2,27 +2,21 @@ syntax = "proto3";
 
 package menu;
 
-import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "netscrawler.menu.v1;menuv1";
 service MenuService {
-  // Категории
-  rpc CreateCategory(CategoryRequest) returns (CategoryResponse);
-  rpc UpdateCategory(UpdateCategoryRequest) returns (CategoryResponse);
-  rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse);
-  rpc DeleteCategory(DeleteCategoryRequest) returns (google.protobuf.Empty);
+  // // Категории
+  // rpc CreateCategory(CategoryRequest) returns (CategoryResponse);
+  // rpc UpdateCategory(UpdateCategoryRequest) returns (CategoryResponse);
+  // rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse);
+  // rpc DeleteCategory(DeleteCategoryRequest) returns (google.protobuf.Empty);
 
   // Блюда
   rpc CreateDish(DishRequest) returns (DishResponse);
   rpc UpdateDish(UpdateDishRequest) returns (DishResponse);
   rpc GetDish(GetDishRequest) returns (DishResponse);
   rpc ListDishes(ListDishesRequest) returns (ListDishesResponse);
-
-  // Акции
-  rpc CreatePromotion(PromotionRequest) returns (PromotionResponse);
-  rpc UpdatePromotion(UpdatePromotionRequest) returns (PromotionResponse);
-  rpc ListActivePromotions(google.protobuf.Empty) returns (ListPromotionsResponse);
 
   // Изображения
   rpc GenerateUploadURL(ImageRequest) returns (ImageResponse);
@@ -56,45 +50,45 @@ message Dish {
   google.protobuf.Timestamp updated_at = 11;
 }
 
-message Promotion {
-  UUID id = 1;
-  UUID dish_id = 2;
-  uint32 discount_percent = 3; // 1-100%
-  google.protobuf.Timestamp start_date = 4;
-  google.protobuf.Timestamp end_date = 5;
-}
+// message Promotion {
+//   UUID id = 1;
+//   UUID dish_id = 2;
+//   uint32 discount_percent = 3; // 1-100%
+//   google.protobuf.Timestamp start_date = 4;
+//   google.protobuf.Timestamp end_date = 5;
+// }
 
 // Запросы/Ответы
 
-message CategoryRequest {
-  string name = 1;
-  string description = 2;
-  int32 display_order = 3;
-}
-
-message UpdateCategoryRequest {
-  UUID id = 1;
-  optional string name = 2;
-  optional string description = 3;
-  optional int32 display_order = 4;
-  optional bool is_active = 5;
-}
-
-message ListCategoriesRequest {
-  bool only_active = 1;
-  int32 page = 2;
-  int32 page_size = 3;
-}
-
-message ListCategoriesResponse {
-  repeated Category categories = 1;
-  int32 total_count = 2;
-}
-
-message DeleteCategoryRequest {
-  UUID id = 1;
-  bool force = 2; // Принудительное удаление с блюдами
-}
+// message CategoryRequest {
+//   string name = 1;
+//   string description = 2;
+//   int32 display_order = 3;
+// }
+//
+// message UpdateCategoryRequest {
+//   UUID id = 1;
+//   optional string name = 2;
+//   optional string description = 3;
+//   optional int32 display_order = 4;
+//   optional bool is_active = 5;
+// }
+//
+// message ListCategoriesRequest {
+//   bool only_active = 1;
+//   int32 page = 2;
+//   int32 page_size = 3;
+// }
+//
+// message ListCategoriesResponse {
+//   repeated Category categories = 1;
+//   int32 total_count = 2;
+// }
+//
+// message DeleteCategoryRequest {
+//   UUID id = 1;
+//   bool force = 2; // Принудительное удаление с блюдами
+// }
 
 message DishRequest {
   string name = 1;
@@ -131,16 +125,16 @@ message ListDishesResponse {
   int32 total_count = 2;
 }
 
-message PromotionRequest {
-  UUID dish_id = 1;
-  int32 discount_percent = 2;
-  google.protobuf.Timestamp start_date = 3;
-  google.protobuf.Timestamp end_date = 4;
-}
-
-message ListPromotionsResponse {
-  repeated Promotion promotions = 1;
-}
+// message PromotionRequest {
+//   UUID dish_id = 1;
+//   int32 discount_percent = 2;
+//   google.protobuf.Timestamp start_date = 3;
+//   google.protobuf.Timestamp end_date = 4;
+// }
+//
+// message ListPromotionsResponse {
+//   repeated Promotion promotions = 1;
+// }
 
 message ImageRequest {
   string filename = 1; // "salad.jpg"
@@ -161,17 +155,17 @@ message DishResponse {
   Dish dish = 1;
 }
 
-message PromotionResponse {
-  Promotion promotion = 1;
-}
+// message PromotionResponse {
+//   Promotion promotion = 1;
+// }
 
 message GetDishRequest {
   UUID dish_id = 1;
 }
 
-message UpdatePromotionRequest {
-  UUID promotion_id = 1;
-  optional int32 discount_percent = 2;
-  optional google.protobuf.Timestamp start_date = 3;
-  optional google.protobuf.Timestamp end_date = 4;
-}
+// message UpdatePromotionRequest {
+//   UUID promotion_id = 1;
+//   optional int32 discount_percent = 2;
+//   optional google.protobuf.Timestamp start_date = 3;
+//   optional google.protobuf.Timestamp end_date = 4;
+// }

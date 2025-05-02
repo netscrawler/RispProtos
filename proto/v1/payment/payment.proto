@@ -35,6 +35,9 @@ enum PaymentMethodType {
   PAYMENT_METHOD_APPLE_PAY = 3;
   PAYMENT_METHOD_GOOGLE_PAY = 4;
 }
+message UUID {
+  bytes value = 1;
+}
 
 message PaymentRequest {
   UUID order_id = 1; // Идентификатор заказа

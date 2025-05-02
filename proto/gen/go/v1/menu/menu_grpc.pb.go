@@ -11,7 +11,6 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -20,38 +19,22 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	MenuService_CreateCategory_FullMethodName       = "/menu.MenuService/CreateCategory"
-	MenuService_UpdateCategory_FullMethodName       = "/menu.MenuService/UpdateCategory"
-	MenuService_ListCategories_FullMethodName       = "/menu.MenuService/ListCategories"
-	MenuService_DeleteCategory_FullMethodName       = "/menu.MenuService/DeleteCategory"
-	MenuService_CreateDish_FullMethodName           = "/menu.MenuService/CreateDish"
-	MenuService_UpdateDish_FullMethodName           = "/menu.MenuService/UpdateDish"
-	MenuService_GetDish_FullMethodName              = "/menu.MenuService/GetDish"
-	MenuService_ListDishes_FullMethodName           = "/menu.MenuService/ListDishes"
-	MenuService_CreatePromotion_FullMethodName      = "/menu.MenuService/CreatePromotion"
-	MenuService_UpdatePromotion_FullMethodName      = "/menu.MenuService/UpdatePromotion"
-	MenuService_ListActivePromotions_FullMethodName = "/menu.MenuService/ListActivePromotions"
-	MenuService_GenerateUploadURL_FullMethodName    = "/menu.MenuService/GenerateUploadURL"
+	MenuService_CreateDish_FullMethodName        = "/menu.MenuService/CreateDish"
+	MenuService_UpdateDish_FullMethodName        = "/menu.MenuService/UpdateDish"
+	MenuService_GetDish_FullMethodName           = "/menu.MenuService/GetDish"
+	MenuService_ListDishes_FullMethodName        = "/menu.MenuService/ListDishes"
+	MenuService_GenerateUploadURL_FullMethodName = "/menu.MenuService/GenerateUploadURL"
 )
 
 // MenuServiceClient is the client API for MenuService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MenuServiceClient interface {
-	// Категории
-	CreateCategory(ctx context.Context, in *CategoryRequest, opts ...grpc.CallOption) (*CategoryResponse, error)
-	UpdateCategory(ctx context.Context, in *UpdateCategoryRequest, opts ...grpc.CallOption) (*CategoryResponse, error)
-	ListCategories(ctx context.Context, in *ListCategoriesRequest, opts ...grpc.CallOption) (*ListCategoriesResponse, error)
-	DeleteCategory(ctx context.Context, in *DeleteCategoryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Блюда
 	CreateDish(ctx context.Context, in *DishRequest, opts ...grpc.CallOption) (*DishResponse, error)
 	UpdateDish(ctx context.Context, in *UpdateDishRequest, opts ...grpc.CallOption) (*DishResponse, error)
 	GetDish(ctx context.Context, in *GetDishRequest, opts ...grpc.CallOption) (*DishResponse, error)
 	ListDishes(ctx context.Context, in *ListDishesRequest, opts ...grpc.CallOption) (*ListDishesResponse, error)
-	// Акции
-	CreatePromotion(ctx context.Context, in *PromotionRequest, opts ...grpc.CallOption) (*PromotionResponse, error)
-	UpdatePromotion(ctx context.Context, in *UpdatePromotionRequest, opts ...grpc.CallOption) (*PromotionResponse, error)
-	ListActivePromotions(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListPromotionsResponse, error)
 	// Изображения
 	GenerateUploadURL(ctx context.Context, in *ImageRequest, opts ...grpc.CallOption) (*ImageResponse, error)
 }
@@ -62,46 +45,6 @@ type menuServiceClient struct {
 
 func NewMenuServiceClient(cc grpc.ClientConnInterface) MenuServiceClient {
 	return &menuServiceClient{cc}
-}
-
-func (c *menuServiceClient) CreateCategory(ctx context.Context, in *CategoryRequest, opts ...grpc.CallOption) (*CategoryResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CategoryResponse)
-	err := c.cc.Invoke(ctx, MenuService_CreateCategory_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *menuServiceClient) UpdateCategory(ctx context.Context, in *UpdateCategoryRequest, opts ...grpc.CallOption) (*CategoryResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CategoryResponse)
-	err := c.cc.Invoke(ctx, MenuService_UpdateCategory_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *menuServiceClient) ListCategories(ctx context.Context, in *ListCategoriesRequest, opts ...grpc.CallOption) (*ListCategoriesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListCategoriesResponse)
-	err := c.cc.Invoke(ctx, MenuService_ListCategories_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *menuServiceClient) DeleteCategory(ctx context.Context, in *DeleteCategoryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, MenuService_DeleteCategory_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *menuServiceClient) CreateDish(ctx context.Context, in *DishRequest, opts ...grpc.CallOption) (*DishResponse, error) {
@@ -144,36 +87,6 @@ func (c *menuServiceClient) ListDishes(ctx context.Context, in *ListDishesReques
 	return out, nil
 }
 
-func (c *menuServiceClient) CreatePromotion(ctx context.Context, in *PromotionRequest, opts ...grpc.CallOption) (*PromotionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PromotionResponse)
-	err := c.cc.Invoke(ctx, MenuService_CreatePromotion_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *menuServiceClient) UpdatePromotion(ctx context.Context, in *UpdatePromotionRequest, opts ...grpc.CallOption) (*PromotionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PromotionResponse)
-	err := c.cc.Invoke(ctx, MenuService_UpdatePromotion_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *menuServiceClient) ListActivePromotions(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListPromotionsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListPromotionsResponse)
-	err := c.cc.Invoke(ctx, MenuService_ListActivePromotions_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *menuServiceClient) GenerateUploadURL(ctx context.Context, in *ImageRequest, opts ...grpc.CallOption) (*ImageResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ImageResponse)
@@ -188,20 +101,11 @@ func (c *menuServiceClient) GenerateUploadURL(ctx context.Context, in *ImageRequ
 // All implementations must embed UnimplementedMenuServiceServer
 // for forward compatibility
 type MenuServiceServer interface {
-	// Категории
-	CreateCategory(context.Context, *CategoryRequest) (*CategoryResponse, error)
-	UpdateCategory(context.Context, *UpdateCategoryRequest) (*CategoryResponse, error)
-	ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error)
-	DeleteCategory(context.Context, *DeleteCategoryRequest) (*emptypb.Empty, error)
 	// Блюда
 	CreateDish(context.Context, *DishRequest) (*DishResponse, error)
 	UpdateDish(context.Context, *UpdateDishRequest) (*DishResponse, error)
 	GetDish(context.Context, *GetDishRequest) (*DishResponse, error)
 	ListDishes(context.Context, *ListDishesRequest) (*ListDishesResponse, error)
-	// Акции
-	CreatePromotion(context.Context, *PromotionRequest) (*PromotionResponse, error)
-	UpdatePromotion(context.Context, *UpdatePromotionRequest) (*PromotionResponse, error)
-	ListActivePromotions(context.Context, *emptypb.Empty) (*ListPromotionsResponse, error)
 	// Изображения
 	GenerateUploadURL(context.Context, *ImageRequest) (*ImageResponse, error)
 	mustEmbedUnimplementedMenuServiceServer()
@@ -211,18 +115,6 @@ type MenuServiceServer interface {
 type UnimplementedMenuServiceServer struct {
 }
 
-func (UnimplementedMenuServiceServer) CreateCategory(context.Context, *CategoryRequest) (*CategoryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateCategory not implemented")
-}
-func (UnimplementedMenuServiceServer) UpdateCategory(context.Context, *UpdateCategoryRequest) (*CategoryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateCategory not implemented")
-}
-func (UnimplementedMenuServiceServer) ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListCategories not implemented")
-}
-func (UnimplementedMenuServiceServer) DeleteCategory(context.Context, *DeleteCategoryRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteCategory not implemented")
-}
 func (UnimplementedMenuServiceServer) CreateDish(context.Context, *DishRequest) (*DishResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateDish not implemented")
 }
@@ -234,15 +126,6 @@ func (UnimplementedMenuServiceServer) GetDish(context.Context, *GetDishRequest) 
 }
 func (UnimplementedMenuServiceServer) ListDishes(context.Context, *ListDishesRequest) (*ListDishesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDishes not implemented")
-}
-func (UnimplementedMenuServiceServer) CreatePromotion(context.Context, *PromotionRequest) (*PromotionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreatePromotion not implemented")
-}
-func (UnimplementedMenuServiceServer) UpdatePromotion(context.Context, *UpdatePromotionRequest) (*PromotionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePromotion not implemented")
-}
-func (UnimplementedMenuServiceServer) ListActivePromotions(context.Context, *emptypb.Empty) (*ListPromotionsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListActivePromotions not implemented")
 }
 func (UnimplementedMenuServiceServer) GenerateUploadURL(context.Context, *ImageRequest) (*ImageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GenerateUploadURL not implemented")
@@ -258,78 +141,6 @@ type UnsafeMenuServiceServer interface {
 
 func RegisterMenuServiceServer(s grpc.ServiceRegistrar, srv MenuServiceServer) {
 	s.RegisterService(&MenuService_ServiceDesc, srv)
-}
-
-func _MenuService_CreateCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CategoryRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MenuServiceServer).CreateCategory(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MenuService_CreateCategory_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MenuServiceServer).CreateCategory(ctx, req.(*CategoryRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MenuService_UpdateCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateCategoryRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MenuServiceServer).UpdateCategory(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MenuService_UpdateCategory_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MenuServiceServer).UpdateCategory(ctx, req.(*UpdateCategoryRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MenuService_ListCategories_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCategoriesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MenuServiceServer).ListCategories(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MenuService_ListCategories_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MenuServiceServer).ListCategories(ctx, req.(*ListCategoriesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MenuService_DeleteCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteCategoryRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MenuServiceServer).DeleteCategory(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MenuService_DeleteCategory_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MenuServiceServer).DeleteCategory(ctx, req.(*DeleteCategoryRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _MenuService_CreateDish_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -404,60 +215,6 @@ func _MenuService_ListDishes_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MenuService_CreatePromotion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PromotionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MenuServiceServer).CreatePromotion(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MenuService_CreatePromotion_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MenuServiceServer).CreatePromotion(ctx, req.(*PromotionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MenuService_UpdatePromotion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdatePromotionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MenuServiceServer).UpdatePromotion(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MenuService_UpdatePromotion_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MenuServiceServer).UpdatePromotion(ctx, req.(*UpdatePromotionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MenuService_ListActivePromotions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MenuServiceServer).ListActivePromotions(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MenuService_ListActivePromotions_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MenuServiceServer).ListActivePromotions(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _MenuService_GenerateUploadURL_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ImageRequest)
 	if err := dec(in); err != nil {
@@ -484,22 +241,6 @@ var MenuService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*MenuServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CreateCategory",
-			Handler:    _MenuService_CreateCategory_Handler,
-		},
-		{
-			MethodName: "UpdateCategory",
-			Handler:    _MenuService_UpdateCategory_Handler,
-		},
-		{
-			MethodName: "ListCategories",
-			Handler:    _MenuService_ListCategories_Handler,
-		},
-		{
-			MethodName: "DeleteCategory",
-			Handler:    _MenuService_DeleteCategory_Handler,
-		},
-		{
 			MethodName: "CreateDish",
 			Handler:    _MenuService_CreateDish_Handler,
 		},
@@ -514,18 +255,6 @@ var MenuService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListDishes",
 			Handler:    _MenuService_ListDishes_Handler,
-		},
-		{
-			MethodName: "CreatePromotion",
-			Handler:    _MenuService_CreatePromotion_Handler,
-		},
-		{
-			MethodName: "UpdatePromotion",
-			Handler:    _MenuService_UpdatePromotion_Handler,
-		},
-		{
-			MethodName: "ListActivePromotions",
-			Handler:    _MenuService_ListActivePromotions_Handler,
 		},
 		{
 			MethodName: "GenerateUploadURL",

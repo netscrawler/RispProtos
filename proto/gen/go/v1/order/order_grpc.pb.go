@@ -24,8 +24,6 @@ const (
 	OrderService_GetOrder_FullMethodName               = "/order.OrderService/GetOrder"
 	OrderService_ListOrders_FullMethodName             = "/order.OrderService/ListOrders"
 	OrderService_UpdateOrderStatus_FullMethodName      = "/order.OrderService/UpdateOrderStatus"
-	OrderService_AddOrderItem_FullMethodName           = "/order.OrderService/AddOrderItem"
-	OrderService_UpdateOrderItem_FullMethodName        = "/order.OrderService/UpdateOrderItem"
 	OrderService_InitiatePayment_FullMethodName        = "/order.OrderService/InitiatePayment"
 	OrderService_ProcessPaymentCallback_FullMethodName = "/order.OrderService/ProcessPaymentCallback"
 	OrderService_GetOrderHistory_FullMethodName        = "/order.OrderService/GetOrderHistory"
@@ -40,9 +38,6 @@ type OrderServiceClient interface {
 	GetOrder(ctx context.Context, in *GetOrderRequest, opts ...grpc.CallOption) (*OrderResponse, error)
 	ListOrders(ctx context.Context, in *ListOrdersRequest, opts ...grpc.CallOption) (*ListOrdersResponse, error)
 	UpdateOrderStatus(ctx context.Context, in *UpdateOrderStatusRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Управление элементами заказа
-	AddOrderItem(ctx context.Context, in *AddOrderItemRequest, opts ...grpc.CallOption) (*OrderItem, error)
-	UpdateOrderItem(ctx context.Context, in *UpdateOrderItemRequest, opts ...grpc.CallOption) (*OrderItem, error)
 	// Платежи
 	InitiatePayment(ctx context.Context, in *PaymentRequest, opts ...grpc.CallOption) (*PaymentResponse, error)
 	ProcessPaymentCallback(ctx context.Context, in *PaymentCallbackRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -98,26 +93,6 @@ func (c *orderServiceClient) UpdateOrderStatus(ctx context.Context, in *UpdateOr
 	return out, nil
 }
 
-func (c *orderServiceClient) AddOrderItem(ctx context.Context, in *AddOrderItemRequest, opts ...grpc.CallOption) (*OrderItem, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(OrderItem)
-	err := c.cc.Invoke(ctx, OrderService_AddOrderItem_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *orderServiceClient) UpdateOrderItem(ctx context.Context, in *UpdateOrderItemRequest, opts ...grpc.CallOption) (*OrderItem, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(OrderItem)
-	err := c.cc.Invoke(ctx, OrderService_UpdateOrderItem_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *orderServiceClient) InitiatePayment(ctx context.Context, in *PaymentRequest, opts ...grpc.CallOption) (*PaymentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PaymentResponse)
@@ -157,9 +132,6 @@ type OrderServiceServer interface {
 	GetOrder(context.Context, *GetOrderRequest) (*OrderResponse, error)
 	ListOrders(context.Context, *ListOrdersRequest) (*ListOrdersResponse, error)
 	UpdateOrderStatus(context.Context, *UpdateOrderStatusRequest) (*emptypb.Empty, error)
-	// Управление элементами заказа
-	AddOrderItem(context.Context, *AddOrderItemRequest) (*OrderItem, error)
-	UpdateOrderItem(context.Context, *UpdateOrderItemRequest) (*OrderItem, error)
 	// Платежи
 	InitiatePayment(context.Context, *PaymentRequest) (*PaymentResponse, error)
 	ProcessPaymentCallback(context.Context, *PaymentCallbackRequest) (*emptypb.Empty, error)
@@ -183,12 +155,6 @@ func (UnimplementedOrderServiceServer) ListOrders(context.Context, *ListOrdersRe
 }
 func (UnimplementedOrderServiceServer) UpdateOrderStatus(context.Context, *UpdateOrderStatusRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderStatus not implemented")
-}
-func (UnimplementedOrderServiceServer) AddOrderItem(context.Context, *AddOrderItemRequest) (*OrderItem, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddOrderItem not implemented")
-}
-func (UnimplementedOrderServiceServer) UpdateOrderItem(context.Context, *UpdateOrderItemRequest) (*OrderItem, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderItem not implemented")
 }
 func (UnimplementedOrderServiceServer) InitiatePayment(context.Context, *PaymentRequest) (*PaymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InitiatePayment not implemented")
@@ -284,42 +250,6 @@ func _OrderService_UpdateOrderStatus_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderService_AddOrderItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddOrderItemRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OrderServiceServer).AddOrderItem(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: OrderService_AddOrderItem_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderServiceServer).AddOrderItem(ctx, req.(*AddOrderItemRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _OrderService_UpdateOrderItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateOrderItemRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OrderServiceServer).UpdateOrderItem(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: OrderService_UpdateOrderItem_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderServiceServer).UpdateOrderItem(ctx, req.(*UpdateOrderItemRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _OrderService_InitiatePayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PaymentRequest)
 	if err := dec(in); err != nil {
@@ -396,14 +326,6 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOrderStatus",
 			Handler:    _OrderService_UpdateOrderStatus_Handler,
-		},
-		{
-			MethodName: "AddOrderItem",
-			Handler:    _OrderService_AddOrderItem_Handler,
-		},
-		{
-			MethodName: "UpdateOrderItem",
-			Handler:    _OrderService_UpdateOrderItem_Handler,
 		},
 		{
 			MethodName: "InitiatePayment",

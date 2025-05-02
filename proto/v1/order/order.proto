@@ -14,9 +14,9 @@ service OrderService {
   rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse);
   rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (google.protobuf.Empty);
 
-  // Управление элементами заказа
-  rpc AddOrderItem(AddOrderItemRequest) returns (OrderItem);
-  rpc UpdateOrderItem(UpdateOrderItemRequest) returns (OrderItem);
+  // // Управление элементами заказа
+  // rpc AddOrderItem(AddOrderItemRequest) returns (OrderItem);
+  // rpc UpdateOrderItem(UpdateOrderItemRequest) returns (OrderItem);
 
   // Платежи
   rpc InitiatePayment(PaymentRequest) returns (PaymentResponse);
