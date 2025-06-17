@@ -54,7 +54,7 @@ enum CookingStatus {
   COOKING_STATUS_SERVED = 4; // Подано
 }
 message UUID {
-  bytes value = 1;
+  string value = 1;
 }
 
 message Order {
