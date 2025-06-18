@@ -14,14 +14,6 @@ service OrderService {
   rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse);
   rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (google.protobuf.Empty);
 
-  // // Управление элементами заказа
-  // rpc AddOrderItem(AddOrderItemRequest) returns (OrderItem);
-  // rpc UpdateOrderItem(UpdateOrderItemRequest) returns (OrderItem);
-
-  // Платежи
-  rpc InitiatePayment(PaymentRequest) returns (PaymentResponse);
-  rpc ProcessPaymentCallback(PaymentCallbackRequest) returns (google.protobuf.Empty);
-
   // История и отчетность
   rpc GetOrderHistory(GetOrderRequest) returns (OrderHistoryResponse);
 }
@@ -62,7 +54,7 @@ message Order {
   UUID user_id = 2; // ID клиента
   OrderType order_type = 4;
   OrderStatus status = 5;
-  bytes delivery_address = 7; // JSONB
+  string delivery_address = 7; // JSONB
   int64 total_amount = 8;
   google.protobuf.Timestamp created_at = 9;
   google.protobuf.Timestamp updated_at = 10;
@@ -96,7 +88,7 @@ message OrderStatusUpdate {
 message CreateOrderRequest {
   UUID user_id = 1;
   OrderType order_type = 2;
-  bytes delivery_address = 4; // JSON
+  string delivery_address = 4; // JSON
   repeated OrderItemCreation items = 5;
 }
 

@@ -6,12 +6,6 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "netscrawler.menu.v1;menuv1";
 service MenuService {
-  // // Категории
-  // rpc CreateCategory(CategoryRequest) returns (CategoryResponse);
-  // rpc UpdateCategory(UpdateCategoryRequest) returns (CategoryResponse);
-  // rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse);
-  // rpc DeleteCategory(DeleteCategoryRequest) returns (google.protobuf.Empty);
-
   // Блюда
   rpc CreateDish(DishRequest) returns (DishResponse);
   rpc UpdateDish(UpdateDishRequest) returns (DishResponse);
