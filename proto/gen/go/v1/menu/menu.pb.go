@@ -7,6 +7,7 @@
 package menuv1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -835,7 +836,7 @@ var File_v1_menu_menu_proto protoreflect.FileDescriptor
 
 const file_v1_menu_menu_proto_rawDesc = "" +
 	"\n" +
-	"\x12v1/menu/menu.proto\x12\x04menu\x1a\x1fgoogle/protobuf/timestamp.proto\"\x1c\n" +
+	"\x12v1/menu/menu.proto\x12\x04menu\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"\x1c\n" +
 	"\x04UUID\x12\x14\n" +
 	"\x05value\x18\x01 \x01(\tR\x05value\"\x92\x01\n" +
 	"\bCategory\x12\x0e\n" +
@@ -921,16 +922,16 @@ const file_v1_menu_menu_proto_rawDesc = "" +
 	".menu.DishR\x04dish\"5\n" +
 	"\x0eGetDishRequest\x12#\n" +
 	"\adish_id\x18\x01 \x01(\v2\n" +
-	".menu.UUIDR\x06dishId2\xb1\x02\n" +
-	"\vMenuService\x123\n" +
+	".menu.UUIDR\x06dishId2\xdd\x03\n" +
+	"\vMenuService\x12O\n" +
 	"\n" +
-	"CreateDish\x12\x11.menu.DishRequest\x1a\x12.menu.DishResponse\x129\n" +
+	"CreateDish\x12\x11.menu.DishRequest\x1a\x12.menu.DishResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/v1/menu/dishes\x12`\n" +
 	"\n" +
-	"UpdateDish\x12\x17.menu.UpdateDishRequest\x1a\x12.menu.DishResponse\x123\n" +
-	"\aGetDish\x12\x14.menu.GetDishRequest\x1a\x12.menu.DishResponse\x12?\n" +
+	"UpdateDish\x12\x17.menu.UpdateDishRequest\x1a\x12.menu.DishResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\x1a\x1a/v1/menu/dishes/{id.value}\x12\\\n" +
+	"\aGetDish\x12\x14.menu.GetDishRequest\x1a\x12.menu.DishResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/v1/menu/dishes/{dish_id.value}\x12X\n" +
 	"\n" +
-	"ListDishes\x12\x17.menu.ListDishesRequest\x1a\x18.menu.ListDishesResponse\x12<\n" +
-	"\x11GenerateUploadURL\x12\x12.menu.ImageRequest\x1a\x13.menu.ImageResponseB\x1cZ\x1anetscrawler.menu.v1;menuv1b\x06proto3"
+	"ListDishes\x12\x17.menu.ListDishesRequest\x1a\x18.menu.ListDishesResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/v1/menu/dishes\x12c\n" +
+	"\x11GenerateUploadURL\x12\x12.menu.ImageRequest\x1a\x13.menu.ImageResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/menu/images/upload-urlB\x1cZ\x1anetscrawler.menu.v1;menuv1b\x06proto3"
 
 var (
 	file_v1_menu_menu_proto_rawDescOnce sync.Once

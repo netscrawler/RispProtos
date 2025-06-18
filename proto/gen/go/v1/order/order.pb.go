@@ -7,6 +7,7 @@
 package orderv1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -244,7 +245,7 @@ type Order struct {
 	UserId          *UUID                  `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // ID клиента
 	OrderType       OrderType              `protobuf:"varint,4,opt,name=order_type,json=orderType,proto3,enum=order.OrderType" json:"order_type,omitempty"`
 	Status          OrderStatus            `protobuf:"varint,5,opt,name=status,proto3,enum=order.OrderStatus" json:"status,omitempty"`
-	DeliveryAddress []byte                 `protobuf:"bytes,7,opt,name=delivery_address,json=deliveryAddress,proto3" json:"delivery_address,omitempty"` // JSONB
+	DeliveryAddress string                 `protobuf:"bytes,7,opt,name=delivery_address,json=deliveryAddress,proto3" json:"delivery_address,omitempty"` // JSONB
 	TotalAmount     int64                  `protobuf:"varint,8,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
 	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt       *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
@@ -311,11 +312,11 @@ func (x *Order) GetStatus() OrderStatus {
 	return OrderStatus_ORDER_STATUS_UNSPECIFIED
 }
 
-func (x *Order) GetDeliveryAddress() []byte {
+func (x *Order) GetDeliveryAddress() string {
 	if x != nil {
 		return x.DeliveryAddress
 	}
-	return nil
+	return ""
 }
 
 func (x *Order) GetTotalAmount() int64 {
@@ -570,7 +571,7 @@ type CreateOrderRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	UserId          *UUID                  `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	OrderType       OrderType              `protobuf:"varint,2,opt,name=order_type,json=orderType,proto3,enum=order.OrderType" json:"order_type,omitempty"`
-	DeliveryAddress []byte                 `protobuf:"bytes,4,opt,name=delivery_address,json=deliveryAddress,proto3" json:"delivery_address,omitempty"` // JSON
+	DeliveryAddress string                 `protobuf:"bytes,4,opt,name=delivery_address,json=deliveryAddress,proto3" json:"delivery_address,omitempty"` // JSON
 	Items           []*OrderItemCreation   `protobuf:"bytes,5,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -620,11 +621,11 @@ func (x *CreateOrderRequest) GetOrderType() OrderType {
 	return OrderType_ORDER_TYPE_UNSPECIFIED
 }
 
-func (x *CreateOrderRequest) GetDeliveryAddress() []byte {
+func (x *CreateOrderRequest) GetDeliveryAddress() string {
 	if x != nil {
 		return x.DeliveryAddress
 	}
-	return nil
+	return ""
 }
 
 func (x *CreateOrderRequest) GetItems() []*OrderItemCreation {
@@ -1300,7 +1301,7 @@ var File_v1_order_order_proto protoreflect.FileDescriptor
 
 const file_v1_order_order_proto_rawDesc = "" +
 	"\n" +
-	"\x14v1/order/order.proto\x12\x05order\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x1c\n" +
+	"\x14v1/order/order.proto\x12\x05order\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"\x1c\n" +
 	"\x04UUID\x12\x14\n" +
 	"\x05value\x18\x01 \x01(\tR\x05value\"\x93\x03\n" +
 	"\x05Order\x12\x1b\n" +
@@ -1309,7 +1310,7 @@ const file_v1_order_order_proto_rawDesc = "" +
 	"\n" +
 	"order_type\x18\x04 \x01(\x0e2\x10.order.OrderTypeR\torderType\x12*\n" +
 	"\x06status\x18\x05 \x01(\x0e2\x12.order.OrderStatusR\x06status\x12)\n" +
-	"\x10delivery_address\x18\a \x01(\fR\x0fdeliveryAddress\x12!\n" +
+	"\x10delivery_address\x18\a \x01(\tR\x0fdeliveryAddress\x12!\n" +
 	"\ftotal_amount\x18\b \x01(\x03R\vtotalAmount\x129\n" +
 	"\n" +
 	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
@@ -1340,7 +1341,7 @@ const file_v1_order_order_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\v2\v.order.UUIDR\x06userId\x12/\n" +
 	"\n" +
 	"order_type\x18\x02 \x01(\x0e2\x10.order.OrderTypeR\torderType\x12)\n" +
-	"\x10delivery_address\x18\x04 \x01(\fR\x0fdeliveryAddress\x12.\n" +
+	"\x10delivery_address\x18\x04 \x01(\tR\x0fdeliveryAddress\x12.\n" +
 	"\x05items\x18\x05 \x03(\v2\x18.order.OrderItemCreationR\x05items\"\x80\x01\n" +
 	"\x11OrderItemCreation\x12$\n" +
 	"\adish_id\x18\x01 \x01(\v2\v.order.UUIDR\x06dishId\x12\x1a\n" +
@@ -1415,16 +1416,16 @@ const file_v1_order_order_proto_rawDesc = "" +
 	"\x16COOKING_STATUS_PENDING\x10\x01\x12\x1c\n" +
 	"\x18COOKING_STATUS_PREPARING\x10\x02\x12\x18\n" +
 	"\x14COOKING_STATUS_READY\x10\x03\x12\x19\n" +
-	"\x15COOKING_STATUS_SERVED\x10\x042\xf4\x03\n" +
-	"\fOrderService\x12>\n" +
-	"\vCreateOrder\x12\x19.order.CreateOrderRequest\x1a\x14.order.OrderResponse\x128\n" +
-	"\bGetOrder\x12\x16.order.GetOrderRequest\x1a\x14.order.OrderResponse\x12A\n" +
+	"\x15COOKING_STATUS_SERVED\x10\x042\x8d\x04\n" +
+	"\fOrderService\x12U\n" +
+	"\vCreateOrder\x12\x19.order.CreateOrderRequest\x1a\x14.order.OrderResponse\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
+	"/v1/orders\x12]\n" +
+	"\bGetOrder\x12\x16.order.GetOrderRequest\x1a\x14.order.OrderResponse\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/v1/orders/{order_id.value}\x12U\n" +
 	"\n" +
-	"ListOrders\x12\x18.order.ListOrdersRequest\x1a\x19.order.ListOrdersResponse\x12L\n" +
-	"\x11UpdateOrderStatus\x12\x1f.order.UpdateOrderStatusRequest\x1a\x16.google.protobuf.Empty\x12@\n" +
-	"\x0fInitiatePayment\x12\x15.order.PaymentRequest\x1a\x16.order.PaymentResponse\x12O\n" +
-	"\x16ProcessPaymentCallback\x12\x1d.order.PaymentCallbackRequest\x1a\x16.google.protobuf.Empty\x12F\n" +
-	"\x0fGetOrderHistory\x12\x16.order.GetOrderRequest\x1a\x1b.order.OrderHistoryResponseB\x1eZ\x1cnetscrawler.order.v1;orderv1b\x06proto3"
+	"ListOrders\x12\x18.order.ListOrdersRequest\x1a\x19.order.ListOrdersResponse\"\x12\x82\xd3\xe4\x93\x02\f\x12\n" +
+	"/v1/orders\x12{\n" +
+	"\x11UpdateOrderStatus\x12\x1f.order.UpdateOrderStatusRequest\x1a\x16.google.protobuf.Empty\"-\x82\xd3\xe4\x93\x02':\x01*2\"/v1/orders/{order_id.value}/status\x12s\n" +
+	"\x0fGetOrderHistory\x12\x16.order.GetOrderRequest\x1a\x1b.order.OrderHistoryResponse\"+\x82\xd3\xe4\x93\x02%\x12#/v1/orders/{order_id.value}/historyB\x1eZ\x1cnetscrawler.order.v1;orderv1b\x06proto3"
 
 var (
 	file_v1_order_order_proto_rawDescOnce sync.Once
@@ -1503,18 +1504,14 @@ var file_v1_order_order_proto_depIdxs = []int32{
 	10, // 35: order.OrderService.GetOrder:input_type -> order.GetOrderRequest
 	11, // 36: order.OrderService.ListOrders:input_type -> order.ListOrdersRequest
 	13, // 37: order.OrderService.UpdateOrderStatus:input_type -> order.UpdateOrderStatusRequest
-	16, // 38: order.OrderService.InitiatePayment:input_type -> order.PaymentRequest
-	18, // 39: order.OrderService.ProcessPaymentCallback:input_type -> order.PaymentCallbackRequest
-	10, // 40: order.OrderService.GetOrderHistory:input_type -> order.GetOrderRequest
-	5,  // 41: order.OrderService.CreateOrder:output_type -> order.OrderResponse
-	5,  // 42: order.OrderService.GetOrder:output_type -> order.OrderResponse
-	12, // 43: order.OrderService.ListOrders:output_type -> order.ListOrdersResponse
-	21, // 44: order.OrderService.UpdateOrderStatus:output_type -> google.protobuf.Empty
-	17, // 45: order.OrderService.InitiatePayment:output_type -> order.PaymentResponse
-	21, // 46: order.OrderService.ProcessPaymentCallback:output_type -> google.protobuf.Empty
-	19, // 47: order.OrderService.GetOrderHistory:output_type -> order.OrderHistoryResponse
-	41, // [41:48] is the sub-list for method output_type
-	34, // [34:41] is the sub-list for method input_type
+	10, // 38: order.OrderService.GetOrderHistory:input_type -> order.GetOrderRequest
+	5,  // 39: order.OrderService.CreateOrder:output_type -> order.OrderResponse
+	5,  // 40: order.OrderService.GetOrder:output_type -> order.OrderResponse
+	12, // 41: order.OrderService.ListOrders:output_type -> order.ListOrdersResponse
+	21, // 42: order.OrderService.UpdateOrderStatus:output_type -> google.protobuf.Empty
+	19, // 43: order.OrderService.GetOrderHistory:output_type -> order.OrderHistoryResponse
+	39, // [39:44] is the sub-list for method output_type
+	34, // [34:39] is the sub-list for method input_type
 	34, // [34:34] is the sub-list for extension type_name
 	34, // [34:34] is the sub-list for extension extendee
 	0,  // [0:34] is the sub-list for field type_name

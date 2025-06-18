@@ -7,6 +7,7 @@
 package notifyv1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -129,15 +130,15 @@ var File_v1_notify_notify_proto protoreflect.FileDescriptor
 
 const file_v1_notify_notify_proto_rawDesc = "" +
 	"\n" +
-	"\x16v1/notify/notify.proto\x12\x06notify\"7\n" +
+	"\x16v1/notify/notify.proto\x12\x06notify\x1a\x1cgoogle/api/annotations.proto\"7\n" +
 	"\vSendRequest\x12\x14\n" +
 	"\x05phone\x18\x01 \x01(\tR\x05phone\x12\x12\n" +
 	"\x04data\x18\x02 \x01(\tR\x04data\"8\n" +
 	"\fSendResponse\x12\x14\n" +
 	"\x05phone\x18\x01 \x01(\tR\x05phone\x12\x12\n" +
-	"\x04data\x18\x02 \x01(\tR\x04data2;\n" +
-	"\x06Notify\x121\n" +
-	"\x04Send\x12\x13.notify.SendRequest\x1a\x14.notify.SendResponseB Z\x1enetscrawler.notify.v1;notifyv1b\x06proto3"
+	"\x04data\x18\x02 \x01(\tR\x04data2W\n" +
+	"\x06Notify\x12M\n" +
+	"\x04Send\x12\x13.notify.SendRequest\x1a\x14.notify.SendResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/v1/notify/sendB Z\x1enetscrawler.notify.v1;notifyv1b\x06proto3"
 
 var (
 	file_v1_notify_notify_proto_rawDescOnce sync.Once

@@ -3,17 +3,41 @@ syntax = "proto3";
 package menu;
 
 import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
 
 option go_package = "netscrawler.menu.v1;menuv1";
 service MenuService {
   // Блюда
-  rpc CreateDish(DishRequest) returns (DishResponse);
-  rpc UpdateDish(UpdateDishRequest) returns (DishResponse);
-  rpc GetDish(GetDishRequest) returns (DishResponse);
-  rpc ListDishes(ListDishesRequest) returns (ListDishesResponse);
+  rpc CreateDish(DishRequest) returns (DishResponse) {
+    option (google.api.http) = {
+      post: "/v1/menu/dishes"
+      body: "*"
+    };
+  }
+  rpc UpdateDish(UpdateDishRequest) returns (DishResponse) {
+    option (google.api.http) = {
+      put: "/v1/menu/dishes/{id.value}"
+      body: "*"
+    };
+  }
+  rpc GetDish(GetDishRequest) returns (DishResponse) {
+    option (google.api.http) = {
+      get: "/v1/menu/dishes/{dish_id.value}"
+    };
+  }
+  rpc ListDishes(ListDishesRequest) returns (ListDishesResponse) {
+    option (google.api.http) = {
+      get: "/v1/menu/dishes"
+    };
+  }
 
   // Изображения
-  rpc GenerateUploadURL(ImageRequest) returns (ImageResponse);
+  rpc GenerateUploadURL(ImageRequest) returns (ImageResponse) {
+    option (google.api.http) = {
+      post: "/v1/menu/images/upload-url"
+      body: "*"
+    };
+  }
 }
 
 // Основные сообщения

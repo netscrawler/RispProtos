@@ -7,6 +7,7 @@
 package userv1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -25,7 +26,7 @@ const (
 
 type User struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
 	Phone         string                 `protobuf:"bytes,3,opt,name=phone,proto3" json:"phone,omitempty"`
 	FullName      string                 `protobuf:"bytes,4,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
@@ -67,11 +68,11 @@ func (*User) Descriptor() ([]byte, []int) {
 	return file_v1_user_user_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *User) GetId() int64 {
+func (x *User) GetId() string {
 	if x != nil {
 		return x.Id
 	}
-	return 0
+	return ""
 }
 
 func (x *User) GetEmail() string {
@@ -125,7 +126,7 @@ func (x *User) GetRoles() []string {
 
 type Staff struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	WorkEmail     string                 `protobuf:"bytes,2,opt,name=work_email,json=workEmail,proto3" json:"work_email,omitempty"`
 	WorkPhone     string                 `protobuf:"bytes,3,opt,name=work_phone,json=workPhone,proto3" json:"work_phone,omitempty"`
 	FullName      string                 `protobuf:"bytes,4,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
@@ -167,11 +168,11 @@ func (*Staff) Descriptor() ([]byte, []int) {
 	return file_v1_user_user_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *Staff) GetId() int64 {
+func (x *Staff) GetId() string {
 	if x != nil {
 		return x.Id
 	}
-	return 0
+	return ""
 }
 
 func (x *Staff) GetWorkEmail() string {
@@ -340,13 +341,13 @@ func (x *GetUserRequest) GetIdentifier() isGetUserRequest_Identifier {
 	return nil
 }
 
-func (x *GetUserRequest) GetId() int64 {
+func (x *GetUserRequest) GetId() string {
 	if x != nil {
 		if x, ok := x.Identifier.(*GetUserRequest_Id); ok {
 			return x.Id
 		}
 	}
-	return 0
+	return ""
 }
 
 func (x *GetUserRequest) GetEmail() string {
@@ -372,7 +373,7 @@ type isGetUserRequest_Identifier interface {
 }
 
 type GetUserRequest_Id struct {
-	Id int64 `protobuf:"varint,1,opt,name=id,proto3,oneof"`
+	Id string `protobuf:"bytes,1,opt,name=id,proto3,oneof"`
 }
 
 type GetUserRequest_Email struct {
@@ -391,7 +392,7 @@ func (*GetUserRequest_Phone) isGetUserRequest_Identifier() {}
 
 type UpdateUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Email         *string                `protobuf:"bytes,2,opt,name=email,proto3,oneof" json:"email,omitempty"`
 	Phone         *string                `protobuf:"bytes,3,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
 	FullName      *string                `protobuf:"bytes,4,opt,name=full_name,json=fullName,proto3,oneof" json:"full_name,omitempty"`
@@ -430,11 +431,11 @@ func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
 	return file_v1_user_user_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *UpdateUserRequest) GetId() int64 {
+func (x *UpdateUserRequest) GetId() string {
 	if x != nil {
 		return x.Id
 	}
-	return 0
+	return ""
 }
 
 func (x *UpdateUserRequest) GetEmail() string {
@@ -467,7 +468,7 @@ func (x *UpdateUserRequest) GetIsActive() bool {
 
 type DeleteUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -502,11 +503,11 @@ func (*DeleteUserRequest) Descriptor() ([]byte, []int) {
 	return file_v1_user_user_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *DeleteUserRequest) GetId() int64 {
+func (x *DeleteUserRequest) GetId() string {
 	if x != nil {
 		return x.Id
 	}
-	return 0
+	return ""
 }
 
 type ListUsersRequest struct {
@@ -699,7 +700,7 @@ func (x *CreateStaffRequest) GetPassword() string {
 
 type UpdateStaffRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	WorkPhone     *string                `protobuf:"bytes,2,opt,name=work_phone,json=workPhone,proto3,oneof" json:"work_phone,omitempty"`
 	Position      *string                `protobuf:"bytes,3,opt,name=position,proto3,oneof" json:"position,omitempty"`
 	IsActive      *bool                  `protobuf:"varint,4,opt,name=is_active,json=isActive,proto3,oneof" json:"is_active,omitempty"`
@@ -737,11 +738,11 @@ func (*UpdateStaffRequest) Descriptor() ([]byte, []int) {
 	return file_v1_user_user_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *UpdateStaffRequest) GetId() int64 {
+func (x *UpdateStaffRequest) GetId() string {
 	if x != nil {
 		return x.Id
 	}
-	return 0
+	return ""
 }
 
 func (x *UpdateStaffRequest) GetWorkPhone() string {
@@ -879,7 +880,7 @@ func (x *ListStaffResponse) GetTotalCount() int32 {
 
 type AssignRoleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Role          string                 `protobuf:"bytes,2,opt,name=role,proto3" json:"role,omitempty"`
 	IsStaff       bool                   `protobuf:"varint,3,opt,name=is_staff,json=isStaff,proto3" json:"is_staff,omitempty"` // true для сотрудников
 	unknownFields protoimpl.UnknownFields
@@ -916,11 +917,11 @@ func (*AssignRoleRequest) Descriptor() ([]byte, []int) {
 	return file_v1_user_user_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *AssignRoleRequest) GetUserId() int64 {
+func (x *AssignRoleRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
-	return 0
+	return ""
 }
 
 func (x *AssignRoleRequest) GetRole() string {
@@ -939,7 +940,7 @@ func (x *AssignRoleRequest) GetIsStaff() bool {
 
 type RevokeRoleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Role          string                 `protobuf:"bytes,2,opt,name=role,proto3" json:"role,omitempty"`
 	IsStaff       bool                   `protobuf:"varint,3,opt,name=is_staff,json=isStaff,proto3" json:"is_staff,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -976,11 +977,11 @@ func (*RevokeRoleRequest) Descriptor() ([]byte, []int) {
 	return file_v1_user_user_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *RevokeRoleRequest) GetUserId() int64 {
+func (x *RevokeRoleRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
-	return 0
+	return ""
 }
 
 func (x *RevokeRoleRequest) GetRole() string {
@@ -1089,9 +1090,9 @@ var File_v1_user_user_proto protoreflect.FileDescriptor
 
 const file_v1_user_user_proto_rawDesc = "" +
 	"\n" +
-	"\x12v1/user/user.proto\x12\x04user\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x88\x02\n" +
+	"\x12v1/user/user.proto\x12\x04user\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x88\x02\n" +
 	"\x04User\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x14\n" +
 	"\x05phone\x18\x03 \x01(\tR\x05phone\x12\x1b\n" +
 	"\tfull_name\x18\x04 \x01(\tR\bfullName\x12\x1b\n" +
@@ -1102,7 +1103,7 @@ const file_v1_user_user_proto_rawDesc = "" +
 	"updated_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x14\n" +
 	"\x05roles\x18\b \x03(\tR\x05roles\"\xfa\x01\n" +
 	"\x05Staff\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1d\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
 	"work_email\x18\x02 \x01(\tR\tworkEmail\x12\x1d\n" +
 	"\n" +
@@ -1118,13 +1119,13 @@ const file_v1_user_user_proto_rawDesc = "" +
 	"\tfull_name\x18\x03 \x01(\tR\bfullName\x12\x1a\n" +
 	"\bpassword\x18\x04 \x01(\tR\bpassword\"`\n" +
 	"\x0eGetUserRequest\x12\x10\n" +
-	"\x02id\x18\x01 \x01(\x03H\x00R\x02id\x12\x16\n" +
+	"\x02id\x18\x01 \x01(\tH\x00R\x02id\x12\x16\n" +
 	"\x05email\x18\x02 \x01(\tH\x00R\x05email\x12\x16\n" +
 	"\x05phone\x18\x03 \x01(\tH\x00R\x05phoneB\f\n" +
 	"\n" +
 	"identifier\"\xcd\x01\n" +
 	"\x11UpdateUserRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\x05email\x18\x02 \x01(\tH\x00R\x05email\x88\x01\x01\x12\x19\n" +
 	"\x05phone\x18\x03 \x01(\tH\x01R\x05phone\x88\x01\x01\x12 \n" +
 	"\tfull_name\x18\x04 \x01(\tH\x02R\bfullName\x88\x01\x01\x12 \n" +
@@ -1136,7 +1137,7 @@ const file_v1_user_user_proto_rawDesc = "" +
 	"\n" +
 	"_is_active\"#\n" +
 	"\x11DeleteUserRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"y\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"y\n" +
 	"\x10ListUsersRequest\x12$\n" +
 	"\vonly_active\x18\x01 \x01(\bH\x00R\n" +
 	"onlyActive\x88\x01\x01\x12\x12\n" +
@@ -1157,7 +1158,7 @@ const file_v1_user_user_proto_rawDesc = "" +
 	"\bposition\x18\x04 \x01(\tR\bposition\x12\x1a\n" +
 	"\bpassword\x18\x05 \x01(\tR\bpassword\"\xb5\x01\n" +
 	"\x12UpdateStaffRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\"\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\"\n" +
 	"\n" +
 	"work_phone\x18\x02 \x01(\tH\x00R\tworkPhone\x88\x01\x01\x12\x1f\n" +
 	"\bposition\x18\x03 \x01(\tH\x01R\bposition\x88\x01\x01\x12 \n" +
@@ -1177,34 +1178,34 @@ const file_v1_user_user_proto_rawDesc = "" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
 	"totalCount\"[\n" +
 	"\x11AssignRoleRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x12\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x12\n" +
 	"\x04role\x18\x02 \x01(\tR\x04role\x12\x19\n" +
 	"\bis_staff\x18\x03 \x01(\bR\aisStaff\"[\n" +
 	"\x11RevokeRoleRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x12\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x12\n" +
 	"\x04role\x18\x02 \x01(\tR\x04role\x12\x19\n" +
 	"\bis_staff\x18\x03 \x01(\bR\aisStaff\".\n" +
 	"\fUserResponse\x12\x1e\n" +
 	"\x04user\x18\x01 \x01(\v2\n" +
 	".user.UserR\x04user\"2\n" +
 	"\rStaffResponse\x12!\n" +
-	"\x05staff\x18\x01 \x01(\v2\v.user.StaffR\x05staff2\xed\x04\n" +
-	"\vUserService\x129\n" +
+	"\x05staff\x18\x01 \x01(\v2\v.user.StaffR\x05staff2\xf5\x06\n" +
+	"\vUserService\x12O\n" +
 	"\n" +
-	"CreateUser\x12\x17.user.CreateUserRequest\x1a\x12.user.UserResponse\x123\n" +
-	"\aGetUser\x12\x14.user.GetUserRequest\x1a\x12.user.UserResponse\x129\n" +
+	"CreateUser\x12\x17.user.CreateUserRequest\x1a\x12.user.UserResponse\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/v1/users\x12K\n" +
+	"\aGetUser\x12\x14.user.GetUserRequest\x1a\x12.user.UserResponse\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/v1/users/{id}\x12T\n" +
 	"\n" +
-	"UpdateUser\x12\x17.user.UpdateUserRequest\x1a\x12.user.UserResponse\x12=\n" +
+	"UpdateUser\x12\x17.user.UpdateUserRequest\x1a\x12.user.UserResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\x1a\x0e/v1/users/{id}\x12U\n" +
 	"\n" +
-	"DeleteUser\x12\x17.user.DeleteUserRequest\x1a\x16.google.protobuf.Empty\x12<\n" +
-	"\tListUsers\x12\x16.user.ListUsersRequest\x1a\x17.user.ListUsersResponse\x12<\n" +
-	"\vCreateStaff\x12\x18.user.CreateStaffRequest\x1a\x13.user.StaffResponse\x12<\n" +
-	"\vUpdateStaff\x12\x18.user.UpdateStaffRequest\x1a\x13.user.StaffResponse\x12<\n" +
-	"\tListStaff\x12\x16.user.ListStaffRequest\x1a\x17.user.ListStaffResponse\x12=\n" +
+	"DeleteUser\x12\x17.user.DeleteUserRequest\x1a\x16.google.protobuf.Empty\"\x16\x82\xd3\xe4\x93\x02\x10*\x0e/v1/users/{id}\x12O\n" +
+	"\tListUsers\x12\x16.user.ListUsersRequest\x1a\x17.user.ListUsersResponse\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/v1/users\x12R\n" +
+	"\vCreateStaff\x12\x18.user.CreateStaffRequest\x1a\x13.user.StaffResponse\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/v1/staff\x12W\n" +
+	"\vUpdateStaff\x12\x18.user.UpdateStaffRequest\x1a\x13.user.StaffResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\x1a\x0e/v1/staff/{id}\x12O\n" +
+	"\tListStaff\x12\x16.user.ListStaffRequest\x1a\x17.user.ListStaffResponse\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/v1/staff\x12c\n" +
 	"\n" +
-	"AssignRole\x12\x17.user.AssignRoleRequest\x1a\x16.google.protobuf.Empty\x12=\n" +
+	"AssignRole\x12\x17.user.AssignRoleRequest\x1a\x16.google.protobuf.Empty\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/users/{user_id}/roles\x12g\n" +
 	"\n" +
-	"RevokeRole\x12\x17.user.RevokeRoleRequest\x1a\x16.google.protobuf.EmptyB\x1cZ\x1anetscrawler.user.v1;userv1b\x06proto3"
+	"RevokeRole\x12\x17.user.RevokeRoleRequest\x1a\x16.google.protobuf.Empty\"(\x82\xd3\xe4\x93\x02\"* /v1/users/{user_id}/roles/{role}B\x1cZ\x1anetscrawler.user.v1;userv1b\x06proto3"
 
 var (
 	file_v1_user_user_proto_rawDescOnce sync.Once

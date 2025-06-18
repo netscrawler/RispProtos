@@ -2,18 +2,64 @@ syntax = "proto3";
 
 package auth;
 
+import "google/api/annotations.proto";
+
 option go_package = "netscrawler.auth.v1;authv1";
 
 service Auth {
-  rpc LoginClientInit(LoginClientInitRequest) returns (LoginInitResponse);
-  rpc LoginClientConfirm(LoginClientConfirmRequest) returns (LoginResponse);
-  rpc RegisterStaff(RegisterStaffRequest) returns (RegisterStaffResponse);
-  rpc UpdateStaff(UpdateStaffRequest) returns (UpdateStaffResponse);
-  rpc LoginStaff(LoginStaffRequest) returns (LoginResponse);
-  rpc DeactivateStaff(DeactivateStaffRequest) returns (DeactivateStaffResponse);
-  rpc LoginYandex(OAuthYandexRequest) returns (LoginResponse);
-  rpc Validate(ValidateRequest) returns (ValidateResponse);
-  rpc Refresh(RefreshRequest) returns (LoginResponse);
+  rpc LoginClientInit(LoginClientInitRequest) returns (LoginInitResponse) {
+    option (google.api.http) = {
+      post: "/v1/auth/client/login/init"
+      body: "*"
+    };
+  }
+  rpc LoginClientConfirm(LoginClientConfirmRequest) returns (LoginResponse) {
+    option (google.api.http) = {
+      post: "/v1/auth/client/login/confirm"
+      body: "*"
+    };
+  }
+  rpc RegisterStaff(RegisterStaffRequest) returns (RegisterStaffResponse) {
+    option (google.api.http) = {
+      post: "/v1/auth/staff/register"
+      body: "*"
+    };
+  }
+  rpc UpdateStaff(UpdateStaffRequest) returns (UpdateStaffResponse) {
+    option (google.api.http) = {
+      put: "/v1/auth/staff/update"
+      body: "*"
+    };
+  }
+  rpc LoginStaff(LoginStaffRequest) returns (LoginResponse) {
+    option (google.api.http) = {
+      post: "/v1/auth/staff/login"
+      body: "*"
+    };
+  }
+  rpc DeactivateStaff(DeactivateStaffRequest) returns (DeactivateStaffResponse) {
+    option (google.api.http) = {
+      delete: "/v1/auth/staff/deactivate/{work_email}"
+    };
+  }
+  rpc LoginYandex(OAuthYandexRequest) returns (LoginResponse) {
+    option (google.api.http) = {
+      post: "/v1/auth/yandex/login"
+      body: "*"
+    };
+  }
+  rpc Validate(ValidateRequest) returns (ValidateResponse) {
+    option (google.api.http) = {
+      post: "/v1/auth/validate"
+      body: "*"
+    };
+  }
+  rpc Refresh(RefreshRequest) returns (LoginResponse) {
+    option (google.api.http) = {
+      post: "/v1/auth/refresh"
+      body: "*"
+    };
+  }
 }
 
 enum Role {

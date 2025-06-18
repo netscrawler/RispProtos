@@ -4,18 +4,41 @@ package order;
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
 
 option go_package = "netscrawler.order.v1;orderv1";
 
 service OrderService {
   // Основные операции с заказами
-  rpc CreateOrder(CreateOrderRequest) returns (OrderResponse);
-  rpc GetOrder(GetOrderRequest) returns (OrderResponse);
-  rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse);
-  rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (google.protobuf.Empty);
+  rpc CreateOrder(CreateOrderRequest) returns (OrderResponse) {
+    option (google.api.http) = {
+      post: "/v1/orders"
+      body: "*"
+    };
+  }
+  rpc GetOrder(GetOrderRequest) returns (OrderResponse) {
+    option (google.api.http) = {
+      get: "/v1/orders/{order_id.value}"
+    };
+  }
+  rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse) {
+    option (google.api.http) = {
+      get: "/v1/orders"
+    };
+  }
+  rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      patch: "/v1/orders/{order_id.value}/status"
+      body: "*"
+    };
+  }
 
   // История и отчетность
-  rpc GetOrderHistory(GetOrderRequest) returns (OrderHistoryResponse);
+  rpc GetOrderHistory(GetOrderRequest) returns (OrderHistoryResponse) {
+    option (google.api.http) = {
+      get: "/v1/orders/{order_id.value}/history"
+    };
+  }
 }
 
 // Типы заказов

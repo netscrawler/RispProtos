@@ -7,6 +7,7 @@
 package authv1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1051,7 +1052,7 @@ var File_v1_auth_auth_proto protoreflect.FileDescriptor
 
 const file_v1_auth_auth_proto_rawDesc = "" +
 	"\n" +
-	"\x12v1/auth/auth.proto\x12\x04auth\"\xe9\x01\n" +
+	"\x12v1/auth/auth.proto\x12\x04auth\x1a\x1cgoogle/api/annotations.proto\"\xe9\x01\n" +
 	"\x12UpdateStaffRequest\x12#\n" +
 	"\rcurrent_email\x18\x01 \x01(\tR\fcurrentEmail\x12)\n" +
 	"\x0enew_work_email\x18\x02 \x01(\tH\x00R\fnewWorkEmail\x88\x01\x01\x12&\n" +
@@ -1124,18 +1125,18 @@ const file_v1_auth_auth_proto_rawDesc = "" +
 	"\n" +
 	"ROLE_ADMIN\x10\x02\x12\x0e\n" +
 	"\n" +
-	"ROLE_STAFF\x10\x032\xe5\x04\n" +
-	"\x04Auth\x12H\n" +
-	"\x0fLoginClientInit\x12\x1c.auth.LoginClientInitRequest\x1a\x17.auth.LoginInitResponse\x12J\n" +
-	"\x12LoginClientConfirm\x12\x1f.auth.LoginClientConfirmRequest\x1a\x13.auth.LoginResponse\x12H\n" +
-	"\rRegisterStaff\x12\x1a.auth.RegisterStaffRequest\x1a\x1b.auth.RegisterStaffResponse\x12B\n" +
-	"\vUpdateStaff\x12\x18.auth.UpdateStaffRequest\x1a\x19.auth.UpdateStaffResponse\x12:\n" +
+	"ROLE_STAFF\x10\x032\xaa\a\n" +
+	"\x04Auth\x12o\n" +
+	"\x0fLoginClientInit\x12\x1c.auth.LoginClientInitRequest\x1a\x17.auth.LoginInitResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/auth/client/login/init\x12t\n" +
+	"\x12LoginClientConfirm\x12\x1f.auth.LoginClientConfirmRequest\x1a\x13.auth.LoginResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/auth/client/login/confirm\x12l\n" +
+	"\rRegisterStaff\x12\x1a.auth.RegisterStaffRequest\x1a\x1b.auth.RegisterStaffResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/auth/staff/register\x12d\n" +
+	"\vUpdateStaff\x12\x18.auth.UpdateStaffRequest\x1a\x19.auth.UpdateStaffResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\x1a\x15/v1/auth/staff/update\x12[\n" +
 	"\n" +
-	"LoginStaff\x12\x17.auth.LoginStaffRequest\x1a\x13.auth.LoginResponse\x12N\n" +
-	"\x0fDeactivateStaff\x12\x1c.auth.DeactivateStaffRequest\x1a\x1d.auth.DeactivateStaffResponse\x12<\n" +
-	"\vLoginYandex\x12\x18.auth.OAuthYandexRequest\x1a\x13.auth.LoginResponse\x129\n" +
-	"\bValidate\x12\x15.auth.ValidateRequest\x1a\x16.auth.ValidateResponse\x124\n" +
-	"\aRefresh\x12\x14.auth.RefreshRequest\x1a\x13.auth.LoginResponseB\x1cZ\x1anetscrawler.auth.v1;authv1b\x06proto3"
+	"LoginStaff\x12\x17.auth.LoginStaffRequest\x1a\x13.auth.LoginResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/v1/auth/staff/login\x12~\n" +
+	"\x0fDeactivateStaff\x12\x1c.auth.DeactivateStaffRequest\x1a\x1d.auth.DeactivateStaffResponse\".\x82\xd3\xe4\x93\x02(*&/v1/auth/staff/deactivate/{work_email}\x12^\n" +
+	"\vLoginYandex\x12\x18.auth.OAuthYandexRequest\x1a\x13.auth.LoginResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/auth/yandex/login\x12W\n" +
+	"\bValidate\x12\x15.auth.ValidateRequest\x1a\x16.auth.ValidateResponse\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/v1/auth/validate\x12Q\n" +
+	"\aRefresh\x12\x14.auth.RefreshRequest\x1a\x13.auth.LoginResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/auth/refreshB\x1cZ\x1anetscrawler.auth.v1;authv1b\x06proto3"
 
 var (
 	file_v1_auth_auth_proto_rawDescOnce sync.Once

@@ -2,10 +2,17 @@ syntax = "proto3";
 
 package notify;
 
+import "google/api/annotations.proto";
+
 option go_package = "netscrawler.notify.v1;notifyv1";
 
 service Notify {
-  rpc Send(SendRequest) returns (SendResponse);
+  rpc Send(SendRequest) returns (SendResponse) {
+    option (google.api.http) = {
+      post: "/v1/notify/send"
+      body: "*"
+    };
+  }
 }
 
 message SendRequest {
